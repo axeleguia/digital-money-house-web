@@ -1,0 +1,18 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navLight {
+  background: #c1fd35;
+}
+
+.navDark {
+  background: #201f22;
+}
+.navActions {
+  display: flex;
+  gap: 20px;
+}

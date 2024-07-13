@@ -1,0 +1,11 @@
+.footer {
+  background-color: #3a393e;
+  color: #c1fd35;
+  padding: 20px;
+}
+
+@media (width < 480px) {
+  .footer {
+    text-align: center;
+  }
+}
