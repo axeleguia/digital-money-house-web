@@ -1,7 +1,9 @@
 import styles from "./footer.module.css";
+
 type FooterProps = {
   isLoggedIn: boolean;
 };
+
 export const Footer = ({ isLoggedIn }: FooterProps) => {
   return (
     <footer className={styles.footer}>

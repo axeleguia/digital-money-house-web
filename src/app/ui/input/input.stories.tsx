@@ -23,9 +23,34 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const InputText: Story = {
   args: {
-    placeholder: "Your username goes here and there",
+    type: "text",
+    placeholder: "Username",
+    size: "normal",
+  },
+};
+
+export const InputPassword: Story = {
+  args: {
+    type: "password",
+    placeholder: "Password",
+    size: "normal",
+  },
+};
+
+export const SmallSize: Story = {
+  args: {
+    type: "text",
+    placeholder: "Username",
+    size: "small",
+  },
+};
+
+export const NormalSize: Story = {
+  args: {
+    type: "text",
+    placeholder: "Password",
     size: "normal",
   },
 };

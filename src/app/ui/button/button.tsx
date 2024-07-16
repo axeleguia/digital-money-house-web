@@ -8,6 +8,7 @@ type ButtonProps = {
   icon?: boolean;
   onClick?: () => void;
 };
+
 export const Button = ({
   label,
   color = undefined,
