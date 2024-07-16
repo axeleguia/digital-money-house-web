@@ -1,0 +1,56 @@
+#registerForm {
+  margin: 155px auto;
+  max-width: 782px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.password {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 140%;
+}
+
+.group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 60px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message {
+  font-size: 15px;
+  font-style: italic;
+  line-height: 140%;
+  text-align: center;
+  color: #da0000;
+}
+
+@media (width <= 1080px) {
+  #registerForm {
+    max-width: 715px;
+  }
+  .message {
+    font-size: 13.7px;
+  }
+}
+
+@media (width < 480px) {
+  .group {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

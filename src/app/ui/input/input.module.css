@@ -1,0 +1,25 @@
+.input {
+  display: flex;
+  background: #ffffff;
+  padding: 20px;
+  border: 1px solid var(--color-input-border);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.small {
+  font-size: 16px;
+  line-height: 135%;
+}
+
+.normal {
+  font-size: 18px;
+}
+
+.invalid {
+  border: var(--color-error-light);
+}
+
+.full {
+  width: 100%;
+}

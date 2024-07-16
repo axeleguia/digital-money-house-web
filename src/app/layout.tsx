@@ -1,8 +1,8 @@
-import { Footer } from "@/components/Footer/Footer";
-import { Header } from "@/components/Header/Header";
+import { Footer } from "@/app/ui/footer/footer";
+import { Header } from "@/app/ui/header/header";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-import "./globals.css";
+import "@/app/ui/globals.css";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -21,10 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={openSans.className}>
-        <Header theme="dark" />
+      <body className={`${openSans.className} antialised`}>
+        <Header isLoggedIn={true} />
         <main>{children}</main>
-        <Footer />
+        <Footer isLoggedIn={true} />
       </body>
     </html>
   );
