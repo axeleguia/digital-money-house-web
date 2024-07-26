@@ -1,4 +1,4 @@
-.card {
+#registerSuccess {
   margin: 155px auto;
   max-width: 530px;
   display: flex;
@@ -8,18 +8,18 @@
   padding: 20px;
 }
 
-.cardTitle {
+#registerSuccess > h2 {
   font-size: 64px;
   line-height: 140%;
   color: #ffffff;
   font-weight: 500;
 }
 
-.cardIcon {
+#registerSuccess > img {
   width: 92px;
 }
 
-.cardMessage {
+#registerSuccess > span {
   font-size: 15px;
   line-height: 140%;
   color: #ffffff;
@@ -28,10 +28,10 @@
 }
 
 @media (width < 480px) {
-  .cardTitle {
+  #registerSuccess > h2 {
     font-size: 34px;
   }
-  .cardIcon {
+  #registerSuccess > img {
     width: 101px;
   }
 }

@@ -1,8 +1,8 @@
-import { Footer } from "@/app/ui/footer/footer";
-import { Header } from "@/app/ui/header/header";
+import { Footer } from "@/ui/footer/footer";
+import "@/ui/globals.css";
+import { Header } from "@/ui/header/header";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-import "@/app/ui/globals.css";
 
 const openSans = Open_Sans({
   subsets: ["latin"],

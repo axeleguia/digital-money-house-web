@@ -1,0 +1,25 @@
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+#footer > div {
+  padding: 20px;
+}
+
+.copyrightAuthenticated {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+.copyrightNoAuthenticated {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+}
+
+@media (width < 480px) {
+  #footer > div {
+    text-align: center;
+  }
+}

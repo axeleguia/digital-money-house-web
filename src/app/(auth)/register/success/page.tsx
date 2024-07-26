@@ -1,17 +1,20 @@
-import { Button } from "@/app/ui/button/button";
-import styles from "./success.module.css";
+import { Button } from "@/ui/button/button";
 import Image from "next/image";
+import Link from "next/link";
+import styles from "./success.module.css";
 
 const SuccessPage = () => {
   return (
-    <div className={styles.card}>
-      <h2 className={styles.cardTitle}>Registro Exitoso</h2>
-      <img src="/success.svg" alt="Success" className={styles.cardIcon} />
-      <span className={styles.cardMessage}>
+    <div id={styles.registerSuccess}>
+      <h2>Registro Exitoso</h2>
+      <Image src="/success.svg" alt="Success" width={100} height={100} />
+      <span>
         Hemos enviado un correo de confirmación para validar tu email, por favor
         revisalo para iniciar sesión
       </span>
-      <Button label="Continuar" color="primary" size="medium" />
+      <Link href={"/login"}>
+        <Button label="Continuar" color="primary" size="medium" />
+      </Link>
     </div>
   );
 };

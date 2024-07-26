@@ -1,0 +1,15 @@
+#loginForm {
+  margin: 155px auto;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+#loginForm > h2 {
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
