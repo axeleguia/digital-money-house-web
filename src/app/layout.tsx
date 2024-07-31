@@ -1,3 +1,4 @@
+import { AppStoreProvider } from "@/providers/app-store-provider";
 import { Footer } from "@/ui/footer/footer";
 import "@/ui/globals.css";
 import { Header } from "@/ui/header/header";
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${openSans.className} antialised`}>
-        <Header isLoggedIn={true} />
-        <main>{children}</main>
-        <Footer isLoggedIn={true} />
+        <AppStoreProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </AppStoreProvider>
       </body>
     </html>
   );

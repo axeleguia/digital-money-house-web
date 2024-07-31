@@ -1,21 +1,21 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import styles from "./footer.module.css";
 
-type FooterProps = {
-  isLoggedIn: boolean;
-};
-
-export const Footer = ({ isLoggedIn }: FooterProps) => {
+export const Footer = () => {
+  const pathname = usePathname();
+  const cssColor = {
+    secondary: styles.bgSecondary,
+    background: styles.bgBackground,
+  };
+  const footerStyle = () => {
+    if (pathname === "/register") return "background";
+    return "secondary";
+  };
   return (
     <footer id={styles.footer}>
-      <div
-        className={
-          isLoggedIn
-            ? styles.copyrightAuthenticated
-            : styles.copyrightNoAuthenticated
-        }
-      >
-        © 2022 Digital Money House
-      </div>
+      <div className={cssColor[footerStyle()]}>© 2022 Digital Money House</div>
     </footer>
   );
 };

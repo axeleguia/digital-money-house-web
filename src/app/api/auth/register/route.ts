@@ -9,6 +9,6 @@ export async function POST(req: Request) {
     const registerResponse = await apiService.register(registerRequest);
     return NextResponse.json({ email: registerResponse.email });
   } catch (error: any) {
-    handleHttpError(error);
+    return handleHttpError(error);
   }
 }

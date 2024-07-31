@@ -1,7 +1,5 @@
 import { RegisterForm } from "@/ui/form/register-form/register-form";
 
-const RegisterPage = () => {
+export default function RegisterPage() {
   return <RegisterForm />;
-};
-
-export default RegisterPage;
+}

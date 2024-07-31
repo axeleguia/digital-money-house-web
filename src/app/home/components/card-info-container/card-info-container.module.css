@@ -46,7 +46,7 @@
 
 @media (width < 480px) {
   .cardInfoList {
-    padding: 15px;
+    padding: 20px;
   }
 
   .ribbon {

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Header } from "./header";
+import { Navbar } from "./navbar";
 
 const meta = {
-  title: "Header",
-  component: Header,
+  title: "Navbar",
+  component: Navbar,
   decorators: [
     (Story) => (
       <div style={{ width: "100%", height: "80px", position: "relative" }}>
@@ -12,19 +12,21 @@ const meta = {
     ),
   ],
   tags: ["autodocs"],
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof Navbar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Authenticated: Story = {
+export const NavbarPrimary: Story = {
   args: {
-    isLoggedIn: true,
+    color: "primary",
+    pathname: "/register",
   },
 };
 
-export const NoAuthenticated: Story = {
+export const NavbarBackground: Story = {
   args: {
-    isLoggedIn: false,
+    color: "background",
+    pathname: "/home",
   },
 };

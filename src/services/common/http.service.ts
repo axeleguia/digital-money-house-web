@@ -1,9 +1,9 @@
 import {
   BadRequestError,
+  HttpError,
   InternalServerError,
   NotFoundError,
   UnauthorizedError,
-  HttpError,
 } from "@/interfaces/http-error";
 
 export class HttpService {
@@ -13,10 +13,11 @@ export class HttpService {
     this.baseUrl = baseUrl;
   }
 
-  httpGet = async <TRequest, TResponse>(
+  httpGet = async <TRequestParams, TResponse>(
     endpoint: string,
-    params?: URLSearchParams,
+    reqParams?: TRequestParams
   ): Promise<TResponse> => {
+    const params = new URLSearchParams(reqParams as any);
     const response = await fetch(
       `${this.baseUrl}${endpoint}${params ? `?${params}` : ""}`,
       {
@@ -24,7 +25,7 @@ export class HttpService {
         headers: {
           "Content-type": "application/json",
         },
-      },
+      }
     );
     if (!response.ok) {
       const httpError = (await response.json()) as HttpError;
@@ -36,7 +37,7 @@ export class HttpService {
 
   httpPost = async <TRequest, TResponse>(
     endpoint: string,
-    body?: TRequest,
+    body?: TRequest
   ): Promise<TResponse> => {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "POST",
@@ -56,7 +57,7 @@ export class HttpService {
   handleHttpError = (
     statusCode: number,
     error: string,
-    endpoint: string,
+    endpoint: string
   ): HttpError => {
     const status: any = {
       400: new BadRequestError(error, endpoint),

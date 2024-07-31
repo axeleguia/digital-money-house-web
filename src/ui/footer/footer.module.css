@@ -9,11 +9,11 @@
   padding: 20px;
 }
 
-.copyrightAuthenticated {
+.bgSecondary {
   background-color: var(--color-secondary);
   color: var(--color-primary);
 }
-.copyrightNoAuthenticated {
+.bgBackground {
   background-color: var(--color-background);
   color: var(--color-primary);
 }

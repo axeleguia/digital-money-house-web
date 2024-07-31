@@ -18,6 +18,10 @@ class RedisService {
   setEx = async (key: string, value: any, time: number) => {
     return await this.redis.set(key, value, "EX", time);
   };
+
+  delete = async (key: string) => {
+    return await this.redis.del(key);
+  };
 }
 const redisService = new RedisService();
 export default redisService;

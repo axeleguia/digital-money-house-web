@@ -12,14 +12,18 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { SubmitButton } from "../../submit-button/submit-button";
 import styles from "./login-form.module.css";
+import { useRouter } from "next/navigation";
+import { useAppStore } from "@/providers/app-store-provider";
 
 export const LoginForm = () => {
+  const setLoggedIn = useAppStore((state) => state.setLoggedIn);
+  const router = useRouter();
   const [hasEmail, setHasEmail] = useState(false);
   const [error, setError] = useState("");
 
   const schema = z.object({
     email: z.string().email(),
-    password: z.string().min(1),
+    password: z.string(),
   });
   type FormData = z.infer<typeof schema>;
   const controls = useForm<FormData>({
@@ -40,7 +44,10 @@ export const LoginForm = () => {
     if (isValid) {
       try {
         await apiService.loginInternal({ email, password });
+        setLoggedIn(true);
+        router.push("/dashboard");
       } catch (e) {
+        setLoggedIn(false);
         if (e instanceof NotFoundError) {
           setError("Usuario inexistente. Vuelve a intentarlo");
         } else if (e instanceof UnauthorizedError) {
@@ -85,7 +92,7 @@ export const LoginForm = () => {
             />
           </Link>
         )}
-        {error && <Small text={error} invalid={true} />}
+        {error && <Small text={error} invalid={true} textAlign="center" />}
       </form>
     </FormProvider>
   );

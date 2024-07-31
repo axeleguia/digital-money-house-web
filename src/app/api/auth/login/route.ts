@@ -24,6 +24,6 @@ export async function POST(req: Request) {
     });
     return NextResponse.json({ email: authResponse.email });
   } catch (error: any) {
-    handleHttpError(error);
+    return handleHttpError(error);
   }
 }

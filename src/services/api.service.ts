@@ -1,12 +1,16 @@
-import httpExternalService from "@/common/http-external.service";
-import httpInternalService from "@/common/http-internal.service";
+import httpExternalService from "@/services/common/http-external.service";
+import httpInternalService from "@/services/common/http-internal.service";
 import {
   LoginInternalResponseType,
   LoginRequestType,
   LoginResponseType,
 } from "@/types/login.types";
 import { LogoutRequestType, LogoutResponseType } from "@/types/logout.types";
-import { RegisterRequest, RegisterResponse } from "@/types/register.types";
+import { RedisRequestType, RedisResponseType } from "@/types/redis.types";
+import {
+  RegisterRequestType,
+  RegisterResponseType,
+} from "@/types/register.types";
 
 class ApiService {
   login = async (loginRequest: LoginRequestType) =>
@@ -14,15 +18,10 @@ class ApiService {
       "/login",
       loginRequest
     );
-  register = async (registerRequest: RegisterRequest) =>
-    httpExternalService.httpPost<RegisterRequest, RegisterResponse>(
+  register = async (registerRequest: RegisterRequestType) =>
+    httpExternalService.httpPost<RegisterRequestType, RegisterResponseType>(
       "/users",
       registerRequest
-    );
-  logout = async (logoutRequest: LogoutRequestType) =>
-    httpExternalService.httpPost<LogoutRequestType, LogoutResponseType>(
-      "/logout",
-      logoutRequest
     );
 
   loginInternal = async (loginRequest: LoginRequestType) =>
@@ -30,10 +29,20 @@ class ApiService {
       "/auth/login",
       loginRequest
     );
-  registerInternal = async (registerRequest: RegisterRequest) =>
-    httpInternalService.httpPost<RegisterRequest, RegisterResponse>(
+  logoutInternal = async (logoutRequest: LogoutRequestType) =>
+    httpExternalService.httpPost<LogoutRequestType, LogoutResponseType>(
+      "/auth/logout",
+      logoutRequest
+    );
+  registerInternal = async (registerRequest: RegisterRequestType) =>
+    httpInternalService.httpPost<RegisterRequestType, RegisterResponseType>(
       "/auth/register",
       registerRequest
+    );
+  getRedisValue = async (redisRequest: RedisRequestType) =>
+    httpInternalService.httpGet<RedisRequestType, RedisResponseType>(
+      "/redis",
+      redisRequest
     );
 }
 

@@ -81,3 +81,9 @@
 .full {
   width: 100%;
 }
+
+@media (width < 480px) {
+  .button {
+    padding: 10px 20px;
+  }
+}

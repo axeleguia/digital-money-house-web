@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./success.module.css";
 
-const SuccessPage = () => {
+export default function SuccessPage() {
   return (
     <div id={styles.registerSuccess}>
       <h2>Registro Exitoso</h2>
@@ -17,6 +17,4 @@ const SuccessPage = () => {
       </Link>
     </div>
   );
-};
-
-export default SuccessPage;
+}

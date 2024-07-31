@@ -24,7 +24,6 @@ export const RegisterForm = () => {
     password2: z.string().min(6).max(20).refine(hasPasswordConstraint),
     phone: z.string().min(1),
   });
-
   schema.refine((data) => data.password === data.password2, {
     params: ["password", "password2"],
     message: "Las contraseñas no coinciden",
@@ -116,7 +115,7 @@ export const RegisterForm = () => {
           <div></div>
           <div className={styles.message}>
             {error && <Small text={error} invalid={true} textAlign="center" />}
-            {!isValid && (
+            {errors && !isValid && (
               <Small
                 text="Completa los campos requeridos"
                 invalid={true}

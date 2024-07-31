@@ -1,4 +1,4 @@
-export type RegisterRequest = {
+export type RegisterRequestType = {
   dni: number;
   firstname: string;
   lastname: string;
@@ -7,7 +7,7 @@ export type RegisterRequest = {
   phone: string;
 };
 
-export type RegisterResponse = {
+export type RegisterResponseType = {
   account_id: number;
   email: string;
   user_id: number;

@@ -1,13 +1,17 @@
-import redisService from "@/common/redis.service";
 import { AccessDeniedError } from "@/interfaces/http-error";
+import redisService from "@/services/common/redis.service";
 import {
   AuthResponseType,
   LoginRequestType,
   LoginResponseType,
 } from "@/types/login.types";
-import { RegisterRequest, RegisterResponse } from "@/types/register.types";
+import {
+  RegisterRequestType,
+  RegisterResponseType,
+} from "@/types/register.types";
 import { v4 as uuidv4 } from "uuid";
 import apiService from "./api.service";
+import { LogoutRequestType, LogoutResponseType } from "@/types/logout.types";
 
 const TEN_MINUTES = 60 * 10;
 
@@ -20,9 +24,15 @@ export class AuthService {
   };
 
   register = async (
-    registerRequest: RegisterRequest
-  ): Promise<RegisterResponse> => {
+    registerRequest: RegisterRequestType
+  ): Promise<RegisterResponseType> => {
     return await apiService.register(registerRequest);
+  };
+
+  logout = async (
+    logoutRequest: LogoutRequestType
+  ): Promise<LogoutResponseType> => {
+    return await apiService.logoutInternal({ token: logoutRequest.token });
   };
 
   buildAuthResponse = (
@@ -43,7 +53,8 @@ export class AuthService {
   getAccessToken = async (sessionId: string) => {
     if (!sessionId)
       throw new AccessDeniedError("Session ID is not valid anymore");
-    const accessToken = await redisService.get(sessionId);
+    const accessToken = (await apiService.getRedisValue({ key: sessionId }))
+      .value;
     if (!accessToken)
       throw new AccessDeniedError("Access Token is not valid anymore");
     return accessToken;

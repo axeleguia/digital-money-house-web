@@ -1,43 +1,24 @@
-import Image from "next/image";
-import { Button } from "../button/button";
+"use client";
+
+import { useAppStore } from "@/providers/app-store-provider";
+import { usePathname } from "next/navigation";
+import { Navbar } from "../navbar/navbar";
 import styles from "./header.module.css";
-import Link from "next/link";
 
-type HeaderProps = {
-  isLoggedIn: boolean;
-};
+export const Header = () => {
+  const pathname = usePathname();
+  const isLoggedIn = useAppStore((state) => state.isLoggedIn);
 
-export const Header = ({ isLoggedIn }: HeaderProps) => {
+  const navStyle = () => {
+    if (pathname === "/home") return "background";
+    if (pathname === "/login") return "primary";
+    if (pathname === "/register") return "primary";
+    return isLoggedIn ? "primary" : "background";
+  };
+
   return (
     <header id={styles.header}>
-      <nav
-        className={
-          isLoggedIn ? styles.navAuthenticated : styles.navUnauthenticated
-        }
-      >
-        <Link href={"/"}>
-          <Image
-            src={isLoggedIn ? "/logo-dark.svg" : "/logo-light.svg"}
-            alt="Digital Money House Logo"
-            width={86.31}
-            height={33}
-          />
-        </Link>
-        <div>
-          {isLoggedIn ? (
-            <>
-              <Link href={"/login"}>
-                <Button label="Ingresar" color="background" />
-              </Link>
-              <Link href={"/register"}>
-                <Button label="Crear cuenta" color="primary" />
-              </Link>
-            </>
-          ) : (
-            <Button label="Iniciar sesión" color="secondary" />
-          )}
-        </div>
-      </nav>
+      <Navbar color={navStyle()} pathname={pathname} />
     </header>
   );
 };

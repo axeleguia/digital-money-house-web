@@ -1,7 +1,5 @@
 import { LoginForm } from "@/ui/form/login-form/login-form";
 
-const LoginPage = () => {
+export default function LoginPage() {
   return <LoginForm />;
-};
-
-export default LoginPage;
+}
