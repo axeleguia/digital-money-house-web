@@ -8,6 +8,7 @@
   --color-secondary: #3a393e;
   --color-tertiary: #eeeaea;
   --color-black: #000000;
+  --color-white: #ffffff;
 
   /*
   --color-background: #052a2d;
@@ -47,14 +48,8 @@
   margin: 0;
 }
 
-body {
-  position: relative;
-  height: 100vh;
-  flex-direction: column;
-}
-
 main {
-  height: 100vh;
+  height: calc(100vh - 125px);
   overflow-y: auto;
   background: #272727;
 }

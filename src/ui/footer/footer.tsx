@@ -14,8 +14,10 @@ export const Footer = () => {
     return "secondary";
   };
   return (
-    <footer id={styles.footer}>
-      <div className={cssColor[footerStyle()]}>© 2022 Digital Money House</div>
+    <footer>
+      <div className={`${styles.copyright} ${cssColor[footerStyle()]}`}>
+        © 2022 Digital Money House
+      </div>
     </footer>
   );
 };

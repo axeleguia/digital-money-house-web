@@ -4,17 +4,16 @@ import { CardInfoContainer } from "./components/card-info-container/card-info-co
 const HomePage = () => {
   return (
     <>
-      <div className={styles.banner}>
-        <div className={styles.bannerContainer}>
-          <div className={styles.bannerTitle}>
-            De ahora en adelante, hacés más con tu dinero
-          </div>
-          <div className={styles.bannerSubtitle}>
+      <section className={styles.landing}>
+        <div className={styles.banner}>
+          <h1>De ahora en adelante, hacés más con tu dinero</h1>
+          <hr />
+          <h2>
             Tu nueva <b>billetera virtual</b>
-          </div>
+          </h2>
         </div>
         <CardInfoContainer />
-      </div>
+      </section>
     </>
   );
 };

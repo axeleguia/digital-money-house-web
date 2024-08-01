@@ -1,0 +1,21 @@
+#sidebar {
+  background-color: var(--color-primary);
+}
+
+#sidebar ul {
+  width: 276px;
+  padding: 50px 30px 30px 30px;
+}
+
+#sidebar ul li {
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+#sidebar ul li:last-child {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.active {
+  font-weight: 700;
+}

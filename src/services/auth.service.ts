@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import apiService from "./api.service";
 import { LogoutRequestType, LogoutResponseType } from "@/types/logout.types";
 
-const TEN_MINUTES = 60 * 10;
+const ONE_DAY = 60 * 60 * 24;
 
 export class AuthService {
   authenticate = async (
@@ -41,8 +41,8 @@ export class AuthService {
   ): AuthResponseType => {
     const sessionId = uuidv4();
     const now = new Date();
-    const expireAt = new Date(now.getTime() + TEN_MINUTES * 1000).getTime();
-    redisService.setEx(sessionId, loginResponse.token, TEN_MINUTES);
+    const expireAt = new Date(now.getTime() + ONE_DAY * 1000).getTime();
+    redisService.setEx(sessionId, loginResponse.token, ONE_DAY);
     return {
       sessionId: sessionId,
       email: email,

@@ -1,10 +1,10 @@
 #loginForm {
-  margin: 155px auto;
-  max-width: 360px;
+  margin: 0 auto;
+  width: 360px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
+  padding: 180px 20px 20px 20px;
 }
 
 #loginForm > h2 {

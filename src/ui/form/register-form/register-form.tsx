@@ -61,7 +61,7 @@ export const RegisterForm = () => {
     <FormProvider {...controls}>
       <form id={styles.registerForm} onSubmit={handleSubmit(onSubmit)}>
         <h2>Crear cuenta</h2>
-        <div className={styles.group}>
+        <div>
           <Input
             fieldName="firstname"
             type="text"
@@ -85,8 +85,9 @@ export const RegisterForm = () => {
         <Small
           text="Usa entre 6 y 20 carácteres (debe contener al menos al menos 1
           carácter especial, una mayúscula y un número)"
+          textAlign="center"
         />
-        <div className={styles.group}>
+        <div>
           <Input
             fieldName="password"
             type="password"
@@ -133,7 +134,6 @@ export const RegisterForm = () => {
           </div>
         </div>
       </form>
-      {/* <DevTool control={control} /> */}
     </FormProvider>
   );
 };

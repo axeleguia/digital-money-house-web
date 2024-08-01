@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import apiService from "./services/api.service";
 
 export const config = {
-  matcher: "/dashboard",
+  matcher: ["/dashboard"],
 };
 
 export async function middleware(request: NextRequest) {
