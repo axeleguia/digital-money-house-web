@@ -1,4 +1,5 @@
-import { Sidebar } from "@/ui/sidebar/sidebar";
+import { Alert } from "@/components/shared/alert/alert";
+import { Sidebar } from "@/components/dashboard/sidebar/sidebar";
 import styles from "./dashboard.module.css";
 
 export default function DashboardLayout({
@@ -10,6 +11,7 @@ export default function DashboardLayout({
     <section id={styles.dashboard}>
       <Sidebar />
       <div id={styles.content}>{children}</div>
+      <Alert />
     </section>
   );
 }

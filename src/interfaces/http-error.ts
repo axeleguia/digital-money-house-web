@@ -20,6 +20,12 @@ export class UnauthorizedError extends HttpError {
   }
 }
 
+export class AccessDeniedError extends HttpError {
+  constructor(message: string, endpoint: string) {
+    super(403, message, endpoint);
+  }
+}
+
 export class NotFoundError extends HttpError {
   constructor(message: string, endpoint: string) {
     super(404, message, endpoint);
@@ -29,11 +35,5 @@ export class NotFoundError extends HttpError {
 export class InternalServerError extends HttpError {
   constructor(message: string, endpoint: string) {
     super(500, message, endpoint);
-  }
-}
-
-export class AccessDeniedError extends Error {
-  constructor(message: string) {
-    super(message);
   }
 }

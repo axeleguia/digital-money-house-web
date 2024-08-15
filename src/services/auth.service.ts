@@ -52,11 +52,11 @@ export class AuthService {
 
   getAccessToken = async (sessionId: string) => {
     if (!sessionId)
-      throw new AccessDeniedError("Session ID is not valid anymore");
+      throw new AccessDeniedError("Session ID is not valid anymore", "");
     const accessToken = (await apiService.getRedisValue({ key: sessionId }))
       .value;
     if (!accessToken)
-      throw new AccessDeniedError("Access Token is not valid anymore");
+      throw new AccessDeniedError("Access Token is not valid anymore", "");
     return accessToken;
   };
 }

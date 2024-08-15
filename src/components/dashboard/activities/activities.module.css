@@ -1,0 +1,7 @@
+.search {
+  margin-bottom: 20px;
+}
+.search > img {
+  position: absolute;
+  top: 50%;
+}

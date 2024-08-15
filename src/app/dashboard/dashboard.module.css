@@ -7,4 +7,6 @@
 
 #content {
   flex: 1;
+  overflow: scroll;
+  background-color: var(--color-tertiary);
 }

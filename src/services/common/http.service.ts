@@ -1,4 +1,5 @@
 import {
+  AccessDeniedError,
   BadRequestError,
   HttpError,
   InternalServerError,
@@ -15,16 +16,15 @@ export class HttpService {
 
   httpGet = async <TRequestParams, TResponse>(
     endpoint: string,
-    reqParams?: TRequestParams
+    reqParams?: TRequestParams,
+    accessToken?: string
   ): Promise<TResponse> => {
     const params = new URLSearchParams(reqParams as any);
     const response = await fetch(
-      `${this.baseUrl}${endpoint}${params ? `?${params}` : ""}`,
+      `${this.baseUrl}${endpoint}${params.size > 0 ? `?${params}` : ""}`,
       {
         method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
+        headers: this.getHeaders(accessToken),
       }
     );
     if (!response.ok) {
@@ -37,13 +37,30 @@ export class HttpService {
 
   httpPost = async <TRequest, TResponse>(
     endpoint: string,
-    body?: TRequest
+    body?: TRequest,
+    accessToken?: string
   ): Promise<TResponse> => {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
+      headers: this.getHeaders(accessToken),
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      const httpError = (await response.json()) as HttpError;
+      this.handleHttpError(response.status, httpError.error, response.url);
+    }
+    const data = (await response.json()) as TResponse;
+    return data;
+  };
+
+  httpPatch = async <TRequest, TResponse>(
+    endpoint: string,
+    body?: TRequest,
+    accessToken?: string
+  ): Promise<TResponse> => {
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      method: "PATCH",
+      headers: this.getHeaders(accessToken),
       body: JSON.stringify(body),
     });
     if (!response.ok) {
@@ -62,9 +79,17 @@ export class HttpService {
     const status: any = {
       400: new BadRequestError(error, endpoint),
       401: new UnauthorizedError(error, endpoint),
+      403: new AccessDeniedError(error, endpoint),
       404: new NotFoundError(error, endpoint),
       500: new InternalServerError(error, endpoint),
     };
     throw status[statusCode] || new Error("Failed to retrieve: " + endpoint);
+  };
+
+  getHeaders = (accessToken?: string) => {
+    const headers = new Headers();
+    headers.set("Content-type", "application/json");
+    if (accessToken) headers.set("Authorization", accessToken);
+    return headers;
   };
 }
