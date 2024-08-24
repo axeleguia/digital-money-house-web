@@ -1,12 +1,13 @@
+import { Button } from "@/components/shared/button/button";
+import { Icon } from "@/components/shared/icons/icons";
 import Link from "next/link";
 import styles from "./register-success.module.css";
-import { Button } from "@/components/shared/button/button";
 
 export const RegisterSuccess = () => {
   return (
     <div id={styles.registerSuccess}>
       <h2>Registro Exitoso</h2>
-      <img src="/success.svg" alt="Success" width={100} height={100} />
+      <Icon icon="success" color="primary" />
       <span>
         Hemos enviado un correo de confirmación para validar tu email, por favor
         revisalo para iniciar sesión

@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { ColorIcon, Icon, SvgIcon } from "../icons/icons";
 import styles from "./input.module.css";
 
 type InputProps = {
@@ -8,7 +9,8 @@ type InputProps = {
   size?: "small" | "normal";
   width?: "full";
   display?: boolean;
-  icon?: string;
+  icon?: SvgIcon;
+  iconColor?: ColorIcon;
 };
 export const Input = ({
   fieldName,
@@ -18,6 +20,7 @@ export const Input = ({
   width,
   display = true,
   icon,
+  iconColor,
 }: InputProps) => {
   const {
     register,
@@ -47,7 +50,9 @@ export const Input = ({
     />
   ) : (
     <div className={styles.wrapper}>
-      <img src={icon} className={styles.icon} />
+      <div className={styles.icon}>
+        <Icon icon={icon} color={iconColor} />
+      </div>
       <input
         type={type}
         placeholder={placeholder}

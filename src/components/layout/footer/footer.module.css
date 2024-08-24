@@ -11,7 +11,7 @@
   color: var(--color-primary);
 }
 
-@media (width < 480px) {
+@media (width < 834px) {
   #footer > div {
     text-align: center;
   }

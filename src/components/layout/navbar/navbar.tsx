@@ -1,6 +1,6 @@
 "use client";
 
-import { ProfileHeader } from "@/components/home/profile-header/profile-header";
+import { ProfileHeader } from "@/components/layout/profile-header/profile-header";
 import apiService from "@/services/api.service";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
@@ -37,7 +37,7 @@ export const Navbar = ({ color = "primary", pathname }: NavbarProps) => {
         <Logo color={color === "primary" ? "background" : "primary"} />
       </Link>
       <div>
-        {pathname === "/home" && (
+        {pathname === "/" && (
           <>
             <Link href={"/login"}>
               <Button label="Ingresar" color="background" />

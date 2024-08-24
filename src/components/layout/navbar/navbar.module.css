@@ -25,7 +25,7 @@
   fill: red;
 }
 
-@media (width < 480px) {
+@media (width < 834px) {
   #nav > a > svg {
     width: 63px;
   }

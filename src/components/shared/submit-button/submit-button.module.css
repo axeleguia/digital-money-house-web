@@ -51,6 +51,7 @@
 
 .large {
   font-size: 16px;
+  line-height: 29px;
   padding: 20px;
 }
 
@@ -80,4 +81,8 @@
 
 .full {
   width: 100%;
+}
+
+.disabled {
+  background-color: var(--color-tertiary);
 }

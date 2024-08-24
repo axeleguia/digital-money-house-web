@@ -1,11 +1,12 @@
 "use client";
 
-import { Input } from "@/components/shared/input/input";
 import { Button } from "@/components/shared/button/button";
+import { Input } from "@/components/shared/input/input";
 import { Small } from "@/components/shared/small/small";
 import { NotFoundError, UnauthorizedError } from "@/interfaces/http-error";
 import apiService from "@/services/api.service";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -15,6 +16,25 @@ import { SubmitButton } from "../../shared/submit-button/submit-button";
 import styles from "./login-form.module.css";
 
 export const LoginForm = () => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (variables: { email: string; password: string }) => {
+      await apiService.loginInternal({
+        email: variables.email,
+        password: variables.password,
+      });
+    },
+    onSuccess: () => {
+      router.push("/dashboard");
+    },
+    onError: (e) => {
+      if (e instanceof NotFoundError) {
+        setError("Usuario inexistente. Vuelve a intentarlo");
+      } else if (e instanceof UnauthorizedError) {
+        setError("Credenciales invalidas. Vuelve a intentarlo");
+      }
+    },
+  });
+
   const router = useRouter();
   const [hasEmail, setHasEmail] = useState(false);
   const [error, setError] = useState("");
@@ -40,17 +60,7 @@ export const LoginForm = () => {
       return;
     }
     if (isValid) {
-      try {
-        await apiService.loginInternal({ email, password });
-        router.push("/dashboard");
-        router.refresh();
-      } catch (e) {
-        if (e instanceof NotFoundError) {
-          setError("Usuario inexistente. Vuelve a intentarlo");
-        } else if (e instanceof UnauthorizedError) {
-          setError("Credenciales invalidas. Vuelve a intentarlo");
-        }
-      }
+      mutate({ email, password });
     }
   };
 
@@ -78,6 +88,7 @@ export const LoginForm = () => {
           size="large"
           width="full"
           onSubmit={onSubmit}
+          isLoading={isPending}
         />
         {!hasEmail && (
           <Link href="/register">

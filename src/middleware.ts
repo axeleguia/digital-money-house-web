@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
     const accessToken = await getAccessToken(sessionId);
     if (!accessToken)
       return NextResponse.redirect(new URL("/login", request.url));
-    return getAuthHeaders(request, accessToken);
+    return setAuthHeaders(request, accessToken);
   } catch (e) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -23,7 +23,7 @@ const getAccessToken = async (sessionId: string): Promise<string> => {
   return (await apiService.getRedisValue({ key: sessionId }))?.value;
 };
 
-const getAuthHeaders = (request: NextRequest, accessToken: string) => {
+const setAuthHeaders = (request: NextRequest, accessToken: string) => {
   const headers = new Headers(request.headers);
   headers.set("x-access-token", accessToken);
   return NextResponse.next({

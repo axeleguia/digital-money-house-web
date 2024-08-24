@@ -1,0 +1,38 @@
+#profileHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.name {
+  background-color: var(--color-primary);
+  color: var(--color-black);
+  padding: 5px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.greeting {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+.menu {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-primary);
+}
+
+@media (width < 834px) {
+  .greeting {
+    display: none;
+  }
+}

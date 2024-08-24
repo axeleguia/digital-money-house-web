@@ -10,3 +10,9 @@
   overflow: scroll;
   background-color: var(--color-tertiary);
 }
+
+@media (width < 834px) {
+  #dashboard > aside {
+    display: none;
+  }
+}

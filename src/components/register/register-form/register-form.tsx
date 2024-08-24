@@ -1,8 +1,7 @@
 "use client";
-
-import apiService from "@/services/api.service";
 import { Input } from "@/components/shared/input/input";
 import { Small } from "@/components/shared/small/small";
+import apiService from "@/services/api.service";
 import { hasPasswordConstraint } from "@/utils/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -16,13 +15,19 @@ export const RegisterForm = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const schema = z.object({
-    email: z.string().email(),
-    firstname: z.string().min(1),
-    lastname: z.string().min(1),
-    dni: z.string().min(8).max(12).pipe(z.coerce.number()),
+    email: z.string().email({ message: "Correo electrónico*" }),
+    firstname: z.string().min(1, { message: "Nombre*" }),
+    lastname: z.string().min(1, { message: "Apellido*" }),
+    dni: z
+      .string()
+      .min(8)
+      .max(12, {
+        message: "DNI: debe ser un digito entre 8-12 digitos",
+      })
+      .pipe(z.coerce.number()),
     password: z.string().min(6).max(20).refine(hasPasswordConstraint),
     password2: z.string().min(6).max(20).refine(hasPasswordConstraint),
-    phone: z.string().min(1),
+    phone: z.string().min(1, { message: "Teléfono: no válido" }),
   });
   schema.refine((data) => data.password === data.password2, {
     params: ["password", "password2"],
@@ -34,9 +39,8 @@ export const RegisterForm = () => {
     resolver: zodResolver(schema),
   });
   const {
-    control,
     handleSubmit,
-    formState: { isValid, errors },
+    formState: { isValid, errors, isDirty, isSubmitted },
   } = controls;
 
   const onSubmit = async (data: FormData) => {
@@ -116,7 +120,7 @@ export const RegisterForm = () => {
           <div></div>
           <div className={styles.message}>
             {error && <Small text={error} invalid={true} textAlign="center" />}
-            {errors && !isValid && (
+            {errors && !isValid && isDirty && isSubmitted && (
               <Small
                 text="Completa los campos requeridos"
                 invalid={true}

@@ -17,7 +17,7 @@
   text-align: left;
 }
 
-@media (width <= 1080px) {
+@media (width <= 1440px) {
   .small {
     font-size: 13.7px;
   }

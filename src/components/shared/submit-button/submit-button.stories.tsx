@@ -46,7 +46,6 @@ export const SecondaryColor: Story = {
   args: {
     label: "Button",
     color: "secondary",
-    icon: true,
   },
 };
 

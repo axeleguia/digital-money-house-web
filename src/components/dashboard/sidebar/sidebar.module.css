@@ -1,18 +1,18 @@
-#sidebar {
+.sidebar {
   background-color: var(--color-primary);
 }
 
-#sidebar ul {
+.sidebar ul {
   width: 276px;
   padding: 50px 30px 30px 30px;
 }
 
-#sidebar ul li {
+.sidebar ul li {
   cursor: pointer;
   margin-bottom: 15px;
 }
 
-#sidebar ul li:last-child {
+.sidebar ul li:last-child {
   color: rgba(0, 0, 0, 0.5);
 }
 

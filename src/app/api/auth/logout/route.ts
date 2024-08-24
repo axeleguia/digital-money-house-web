@@ -3,17 +3,15 @@ import { handleHttpError } from "@/utils/http";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST() {
   try {
-    const authCookie = cookies().get("SESSION_ID");
-    if (authCookie) {
-      const sessionId = authCookie.value;
-      redisService.delete(sessionId);
-      cookies().delete("SESSION_ID");
-      cookies().delete("SESSION_USER");
-    }
-    return NextResponse.json({});
-  } catch (error) {
+    const cookieStore = cookies();
+    const sessionId = cookieStore.get("SESSION_ID")?.value || "";
+    await redisService.delete(sessionId);
+    cookies().delete("SESSION_ID");
+    cookies().delete("SESSION_USER");
+    return NextResponse.json({ sessionId: sessionId });
+  } catch (error: any) {
     return handleHttpError(error);
   }
 }

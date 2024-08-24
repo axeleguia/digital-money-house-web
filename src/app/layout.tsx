@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/footer/footer";
 import { Header } from "@/components/layout/header/header";
+import { AppStoreProvider } from "@/providers/app-store-provider";
 import ReactQueryProvider from "@/providers/react-query-provider";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
@@ -24,9 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${openSans.className} antialised`}>
         <ReactQueryProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <AppStoreProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </AppStoreProvider>
         </ReactQueryProvider>
       </body>
     </html>

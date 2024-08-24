@@ -20,13 +20,13 @@
   gap: 40px 60px;
 }
 
-@media (width <= 1080px) {
+@media (width <= 1440px) {
   #registerForm {
     max-width: 715px;
   }
 }
 
-@media (width < 480px) {
+@media (width < 834px) {
   #registerForm {
     padding: 40px;
   }

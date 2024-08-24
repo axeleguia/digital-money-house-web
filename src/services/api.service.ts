@@ -29,11 +29,8 @@ class ApiService {
       loginRequest
     );
 
-  logoutInternal = async (logoutRequest: LogoutRequestType) =>
-    httpExternalService.httpPost<LogoutRequestType, LogoutResponseType>(
-      "/auth/logout",
-      logoutRequest
-    );
+  logoutInternal = async () =>
+    httpInternalService.httpPost<{}, LogoutResponseType>("/auth/logout");
 
   registerInternal = async (registerRequest: RegisterRequestType) =>
     httpInternalService.httpPost<RegisterRequestType, RegisterResponseType>(

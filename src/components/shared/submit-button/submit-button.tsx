@@ -48,12 +48,13 @@ export const SubmitButton = <T extends FieldValues>({
         ${cssSize[size!]}
         ${cssColor[color!]}
         ${cssWidth[width!]}
+        ${isLoading ? styles.disabled : ""}
       `}
       onClick={handleSubmit(onSubmit)}
+      disabled={isLoading}
     >
       {label}
-      {icon && <img src="/arrow.svg" alt="Arrow Icon" />}
-      {isLoading && <img src="/arrow.svg" alt="Arrow Icon" />}
+      {isLoading && <img src="/spinner.svg" alt="Loading" />}
     </button>
   );
 };

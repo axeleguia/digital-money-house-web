@@ -15,7 +15,7 @@
   font-weight: 500;
 }
 
-#registerSuccess > img {
+#registerSuccess > svg {
   width: 92px;
 }
 
@@ -27,7 +27,7 @@
   padding-bottom: 20px;
 }
 
-@media (width < 480px) {
+@media (width < 834px) {
   #registerSuccess {
     padding: 180px 40px 40px 40px;
   }
@@ -36,7 +36,7 @@
     font-size: 34px;
   }
 
-  #registerSuccess > img {
+  #registerSuccess > svg {
     width: 101px;
   }
 }

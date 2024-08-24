@@ -11,7 +11,6 @@ import {
 } from "@/types/register.types";
 import { v4 as uuidv4 } from "uuid";
 import apiService from "./api.service";
-import { LogoutRequestType, LogoutResponseType } from "@/types/logout.types";
 
 const ONE_DAY = 60 * 60 * 24;
 
@@ -27,12 +26,6 @@ export class AuthService {
     registerRequest: RegisterRequestType
   ): Promise<RegisterResponseType> => {
     return await apiService.register(registerRequest);
-  };
-
-  logout = async (
-    logoutRequest: LogoutRequestType
-  ): Promise<LogoutResponseType> => {
-    return await apiService.logoutInternal({ token: logoutRequest.token });
   };
 
   buildAuthResponse = (

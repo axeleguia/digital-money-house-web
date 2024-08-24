@@ -1,9 +1,5 @@
-import { redirect } from "next/navigation";
+import { LandingPage } from "@/components/home/landing-page/landing-page";
 
 export default function Home() {
-  const authenticated = false;
-  if (!authenticated) {
-    redirect("/home");
-  }
-  return null;
+  return <LandingPage />;
 }

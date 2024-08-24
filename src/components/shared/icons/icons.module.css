@@ -1,0 +1,31 @@
+.colorBackground {
+  color: var(--color-background);
+}
+
+.colorPrimary {
+  color: var(--color-primary);
+}
+
+.colorSecondary {
+  color: var(--color-secondary);
+}
+
+.colorTertiary {
+  color: var(--color-tertiary);
+}
+
+.colorOpaque {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.colorGray {
+  color: #828282;
+}
+
+.colorSilver {
+  color: #cecece;
+}
+
+.colorBlack {
+  color: var(--color-black);
+}

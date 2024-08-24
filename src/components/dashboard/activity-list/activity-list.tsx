@@ -1,4 +1,6 @@
 import { ActivityItem } from "@/components/dashboard/activity-item/activity-item";
+import { Icon } from "@/components/shared/icons/icons";
+import { List } from "@/components/shared/list/list";
 import Link from "next/link";
 import styles from "./activity-list.module.css";
 
@@ -36,17 +38,18 @@ export const ActivityList = () => {
     },
   ];
   return (
-    <div className={styles.activityList}>
-      <p>Tu actividad</p>
-      {items.map((item) => (
-        <ActivityItem key={item.title} {...item} />
-      ))}
-      <Link href="/dashboard/actividad">
+    <List title="Tu actividad">
+      <ul>
+        {items.map((item) => (
+          <ActivityItem key={item.id} {...item} />
+        ))}
+      </ul>
+      <Link href="/dashboard/activity">
         <div className={styles.viewAll}>
           <div>Ver toda tu actividad</div>
-          <img src="/arrow-right.svg" alt="Ver" />
+          <Icon icon="arrow-right" color="gray" />
         </div>
       </Link>
-    </div>
+    </List>
   );
 };
