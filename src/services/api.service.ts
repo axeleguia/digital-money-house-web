@@ -6,8 +6,8 @@ import {
   LoginRequestType,
   LoginResponseType,
 } from "@/types/login.types";
-import { LogoutRequestType, LogoutResponseType } from "@/types/logout.types";
-import { RedisRequestType, RedisResponseType } from "@/types/redis.types";
+import { LogoutResponseType } from "@/types/logout.types";
+import { RedisResponseType } from "@/types/redis.types";
 import {
   RegisterRequestType,
   RegisterResponseType,
@@ -38,11 +38,8 @@ class ApiService {
       registerRequest
     );
 
-  getRedisValue = async (redisRequest: RedisRequestType) =>
-    httpInternalService.httpGet<RedisRequestType, RedisResponseType>(
-      "/redis",
-      redisRequest
-    );
+  getRedisValue = async (key: string) =>
+    httpInternalService.httpGet<RedisResponseType>(`/redis?key=${key}`);
 
   // Digital Money Back 1.0
 
@@ -59,13 +56,32 @@ class ApiService {
     );
 
   getAccount = async () =>
-    httpProxyService.httpGet<{}, GetAccountResponseType>("/account", {});
+    httpProxyService.httpGet<GetAccountResponseType>("/account");
 
-  getUser = async ({ id }: GetUserRequestType) =>
-    httpProxyService.httpGet<{}, GetUserResponseType>(`/users/${id}`);
+  getAccountCards = async ({ account_id }: GetAccountCardsRequestType) =>
+    httpProxyService.httpGet<GetAccountCardsResponseType[]>(
+      `/accounts/${account_id}/cards`
+    );
+
+  postAccountCards = async (
+    account_id: number,
+    cardRequest: PostAccountCardsRequestType
+  ) =>
+    httpProxyService.httpPost<
+      PostAccountCardsRequestType,
+      PostAccountCardsResponseType
+    >(`/accounts/${account_id}/cards`, cardRequest);
+
+  deleteAccountCards = async (account_id: number, card_id: number) =>
+    httpProxyService.httpDelete<{ account_id: number; card_id: number }, any>(
+      `/accounts/${account_id}/cards/${card_id}`
+    );
+
+  getUser = async ({ user_id }: GetUserRequestType) =>
+    httpProxyService.httpGet<GetUserResponseType>(`/users/${user_id}`);
 
   patchUser = async (userRequest: PatchUserRequestType) =>
-    httpProxyService.httpPatch<{}, PatchUserResponseType>(
+    httpProxyService.httpPatch<PatchUserRequestType, PatchUserResponseType>(
       `/users/${userRequest.id}`,
       userRequest
     );

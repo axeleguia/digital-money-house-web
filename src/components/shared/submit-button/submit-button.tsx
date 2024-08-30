@@ -5,7 +5,7 @@ import styles from "./submit-button.module.css";
 
 type SubmitButtonProps<T> = {
   label: string;
-  color?: "primary" | "secondary" | "tertiary" | "background";
+  color?: "primary" | "secondary" | "tertiary" | "background" | "silver";
   size?: "small" | "medium" | "large";
   width?: "full" | "default";
   icon?: boolean;
@@ -34,6 +34,7 @@ export const SubmitButton = <T extends FieldValues>({
     secondary: styles.secondary,
     tertiary: styles.tertiary,
     background: styles.background,
+    silver: styles.silver,
     undefined: "",
   };
   const cssWidth: any = {

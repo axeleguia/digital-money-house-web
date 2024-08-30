@@ -2,12 +2,13 @@
 
 import { Icon } from "@/components/shared/icons/icons";
 import { Small } from "@/components/shared/small/small";
-import apiService from "@/services/api.service";
-import { GetAccountResponseType } from "@/types/account.types";
-import { GetUserResponseType } from "@/types/user.types";
+import {
+  useGetAccount,
+  useGetAccountUser,
+  useUpdateAccountUser,
+} from "@/hooks/api-query-hook";
 import { hasPasswordConstraint } from "@/utils/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -17,45 +18,17 @@ export const ProfileEditorForm = () => {
   const [selectedInput, setSelectedInput] = useState("");
   const [previousValue, setPreviousValue] = useState("");
 
-  const queryClient = new QueryClient();
-
-  const { data: accountData } = useQuery<GetAccountResponseType>({
-    queryKey: ["account"],
-  });
+  const { data: accountData } = useGetAccount();
 
   const {
     data: userData,
     isSuccess,
     refetch,
-  } = useQuery<GetUserResponseType>({
-    queryKey: ["user"],
-    queryFn: async () => apiService.getUser({ id: accountData?.user_id! }),
-    enabled: !!accountData?.user_id,
-  });
+  } = useGetAccountUser(accountData?.user_id!);
 
   const { id, firstname, lastname, dni, email, phone } = userData || {};
 
-  const { mutate } = useMutation({
-    mutationFn: async (variables: { key: string; value: any }) => {
-      if (variables.key === "fullname") {
-        const fullname = variables.value.split(" ");
-        return await apiService.patchUser({
-          id: accountData?.user_id!,
-          firstname: fullname[0],
-          lastname: fullname.slice(1).join(" "),
-        });
-      } else {
-        return await apiService.patchUser({
-          id: accountData?.user_id!,
-          [variables.key]: variables.value,
-        });
-      }
-    },
-    onSuccess: (data) => {
-      queryClient.setQueryData(["user"], data);
-      refetch();
-    },
-  });
+  const { mutate } = useUpdateAccountUser(accountData?.user_id!);
 
   const schema = z.object({
     email: z.string().email(),

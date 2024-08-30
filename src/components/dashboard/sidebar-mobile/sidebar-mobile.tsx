@@ -2,10 +2,8 @@
 
 import { Icon } from "@/components/shared/icons/icons";
 import { useAppStore } from "@/providers/app-store-provider";
-import { routes } from "@/utils/routes";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import MediaQuery from "react-responsive";
+import { Menu } from "../menu/menu";
 import styles from "./sidebar-mobile.module.css";
 
 type SidebarMobileProps = {
@@ -16,7 +14,6 @@ type SidebarMobileProps = {
 export const SidebarMobile = ({ firstname, lastname }: SidebarMobileProps) => {
   const sidebarIsOpen = useAppStore((state) => state.sidebarIsOpen);
   const toggle = useAppStore((state) => state.toggle);
-  const pathname = usePathname();
   const handleMediaQueryChange = (matches: boolean) => matches && toggle(false);
 
   return (
@@ -34,16 +31,7 @@ export const SidebarMobile = ({ firstname, lastname }: SidebarMobileProps) => {
               onClick={() => toggle(!sidebarIsOpen)}
             />
           </div>
-          <ul>
-            {routes.map((route) => (
-              <li
-                key={route.path}
-                className={route.path === pathname ? styles.active : ""}
-              >
-                <Link href={route.path}>{route.name}</Link>
-              </li>
-            ))}
-          </ul>
+          <Menu />
         </aside>
       </MediaQuery>
     )

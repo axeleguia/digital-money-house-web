@@ -2,7 +2,7 @@ import styles from "./button.module.css";
 
 type ButtonProps = {
   label: string;
-  color?: "primary" | "secondary" | "tertiary" | "background";
+  color?: "primary" | "secondary" | "tertiary" | "background" | "silver";
   size?: "small" | "medium" | "large" | "extralarge";
   width?: "full" | "default";
   onClick?: () => void;
@@ -29,6 +29,7 @@ export const Button = ({
     secondary: styles.secondary,
     tertiary: styles.tertiary,
     background: styles.background,
+    silver: styles.silver,
     undefined: "",
   };
   const cssWidth: any = {

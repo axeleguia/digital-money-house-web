@@ -14,19 +14,14 @@ export class HttpService {
     this.baseUrl = baseUrl;
   }
 
-  httpGet = async <TRequestParams, TResponse>(
+  httpGet = async <TResponse>(
     endpoint: string,
-    reqParams?: TRequestParams,
-    accessToken?: string
+    accessToken?: string,
   ): Promise<TResponse> => {
-    const params = new URLSearchParams(reqParams as any);
-    const response = await fetch(
-      `${this.baseUrl}${endpoint}${params.size > 0 ? `?${params}` : ""}`,
-      {
-        method: "GET",
-        headers: this.getHeaders(accessToken),
-      }
-    );
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      method: "GET",
+      headers: this.getHeaders(accessToken),
+    });
     if (!response.ok) {
       const httpError = (await response.json()) as HttpError;
       this.handleHttpError(response.status, httpError.error, endpoint);
@@ -38,12 +33,12 @@ export class HttpService {
   httpPost = async <TRequest, TResponse>(
     endpoint: string,
     body?: TRequest,
-    accessToken?: string
+    accessToken?: string,
   ): Promise<TResponse> => {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "POST",
       headers: this.getHeaders(accessToken),
-      body: JSON.stringify(body),
+      body: JSON.stringify(body || {}),
     });
     if (!response.ok) {
       const httpError = (await response.json()) as HttpError;
@@ -56,12 +51,30 @@ export class HttpService {
   httpPatch = async <TRequest, TResponse>(
     endpoint: string,
     body?: TRequest,
-    accessToken?: string
+    accessToken?: string,
   ): Promise<TResponse> => {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "PATCH",
       headers: this.getHeaders(accessToken),
-      body: JSON.stringify(body),
+      body: JSON.stringify(body || {}),
+    });
+    if (!response.ok) {
+      const httpError = (await response.json()) as HttpError;
+      this.handleHttpError(response.status, httpError.error, response.url);
+    }
+    const data = (await response.json()) as TResponse;
+    return data;
+  };
+
+  httpDelete = async <TRequest, TResponse>(
+    endpoint: string,
+    body?: TRequest,
+    accessToken?: string,
+  ): Promise<TResponse> => {
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      method: "DELETE",
+      headers: this.getHeaders(accessToken),
+      body: JSON.stringify(body || {}),
     });
     if (!response.ok) {
       const httpError = (await response.json()) as HttpError;
@@ -74,7 +87,7 @@ export class HttpService {
   handleHttpError = (
     statusCode: number,
     error: string,
-    endpoint: string
+    endpoint: string,
   ): HttpError => {
     const status: any = {
       400: new BadRequestError(error, endpoint),

@@ -1,5 +1,5 @@
 export type GetUserRequestType = {
-  id: number;
+  user_id: number;
 };
 
 export type GetUserResponseType = {

@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
 }
 
 const getAccessToken = async (sessionId: string): Promise<string> => {
-  return (await apiService.getRedisValue({ key: sessionId }))?.value;
+  return (await apiService.getRedisValue(sessionId))?.value;
 };
 
 const setAuthHeaders = (request: NextRequest, accessToken: string) => {

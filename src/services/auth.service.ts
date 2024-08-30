@@ -12,30 +12,30 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import apiService from "./api.service";
 
-const ONE_DAY = 60 * 60 * 24;
+const THREE_HOURS = 60 * 60 * 3;
 
 export class AuthService {
   authenticate = async (
-    loginRequest: LoginRequestType
+    loginRequest: LoginRequestType,
   ): Promise<AuthResponseType> => {
     const loginResponse = await apiService.login(loginRequest);
     return this.buildAuthResponse(loginRequest.email, loginResponse);
   };
 
   register = async (
-    registerRequest: RegisterRequestType
+    registerRequest: RegisterRequestType,
   ): Promise<RegisterResponseType> => {
     return await apiService.register(registerRequest);
   };
 
   buildAuthResponse = (
     email: string,
-    loginResponse: LoginResponseType
+    loginResponse: LoginResponseType,
   ): AuthResponseType => {
     const sessionId = uuidv4();
     const now = new Date();
-    const expireAt = new Date(now.getTime() + ONE_DAY * 1000).getTime();
-    redisService.setEx(sessionId, loginResponse.token, ONE_DAY);
+    const expireAt = new Date(now.getTime() + THREE_HOURS * 1000).getTime();
+    redisService.setEx(sessionId, loginResponse.token, THREE_HOURS);
     return {
       sessionId: sessionId,
       email: email,

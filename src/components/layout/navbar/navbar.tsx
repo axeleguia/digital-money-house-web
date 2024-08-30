@@ -1,10 +1,9 @@
 "use client";
 
 import { ProfileHeader } from "@/components/layout/profile-header/profile-header";
-import apiService from "@/services/api.service";
-import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 import { Button } from "@/components/shared/button/button";
+import { useGetAccount, useGetAccountUser } from "@/hooks/api-query-hook";
+import Link from "next/link";
 import { Logo } from "../logo/logo";
 import styles from "./navbar.module.css";
 
@@ -14,22 +13,14 @@ type NavbarProps = {
 };
 
 export const Navbar = ({ color = "primary", pathname }: NavbarProps) => {
+  const { data: accountData } = useGetAccount();
+  const { data: userData } = useGetAccountUser(accountData?.user_id!);
+  const { firstname, lastname } = userData || {};
+
   const cssColor = {
     primary: styles.bgPrimary,
     background: styles.bgBackground,
   };
-
-  const { data: accountData } = useQuery({
-    queryKey: ["account"],
-    queryFn: async () => apiService.getAccount(),
-  });
-
-  const { data: userData } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => apiService.getUser({ id: accountData?.user_id! }),
-    enabled: !!accountData?.user_id,
-  });
-  const { firstname, lastname } = userData || {};
 
   return (
     <nav id={styles.nav} className={cssColor[color]}>

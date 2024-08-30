@@ -3,8 +3,8 @@
 import { SidebarMobile } from "@/components/dashboard/sidebar-mobile/sidebar-mobile";
 import { Icon } from "@/components/shared/icons/icons";
 import { useAppStore } from "@/providers/app-store-provider";
-import styles from "./profile-header.module.css";
 import MediaQuery from "react-responsive";
+import styles from "./profile-header.module.css";
 
 type ProfileHeaderProps = {
   firstname: string;

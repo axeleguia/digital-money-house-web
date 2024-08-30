@@ -6,7 +6,7 @@ import { useStore } from "zustand";
 
 export type AppStoreApi = ReturnType<typeof createAppStore>;
 export const AppStoreContext = createContext<AppStoreApi | undefined>(
-  undefined
+  undefined,
 );
 export interface AppStoreProviderProps {
   children: ReactNode;
@@ -25,9 +25,9 @@ export const AppStoreProvider = ({ children }: AppStoreProviderProps) => {
 };
 
 export const useAppStore = <T,>(selector: (store: AppStore) => T): T => {
-  const counterStoreContext = useContext(AppStoreContext);
-  if (!counterStoreContext) {
+  const storeContext = useContext(AppStoreContext);
+  if (!storeContext) {
     throw new Error(`useAppStore must be used within AppStoreProvider`);
   }
-  return useStore(counterStoreContext, selector);
+  return useStore(storeContext, selector);
 };

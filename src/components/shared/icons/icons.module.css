@@ -19,11 +19,11 @@
 }
 
 .colorGray {
-  color: #828282;
+  color: var(--color-gray);
 }
 
 .colorSilver {
-  color: #cecece;
+  color: var(--color-silver);
 }
 
 .colorBlack {

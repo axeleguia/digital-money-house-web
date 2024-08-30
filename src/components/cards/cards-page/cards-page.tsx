@@ -1,12 +1,13 @@
-import { AddCard } from "@/components/cards/add-card/add-card";
-import { CardList } from "../card-list/card-list";
+import { CardStoreProvider } from "@/providers/card-store.provider";
+import { CardContainer } from "../card-container/card-container";
 import styles from "./cards-page.module.css";
 
 export const CardsPage = () => {
   return (
-    <div id={styles.page}>
-      <AddCard />
-      <CardList />
-    </div>
+    <CardStoreProvider>
+      <div id={styles.page}>
+        <CardContainer />
+      </div>
+    </CardStoreProvider>
   );
 };

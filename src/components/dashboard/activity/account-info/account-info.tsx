@@ -1,16 +1,12 @@
 "use client";
 
 import { Icon } from "@/components/shared/icons/icons";
-import { GetAccountResponseType } from "@/types/account.types";
-import { useQuery } from "@tanstack/react-query";
+import { useGetAccount } from "@/hooks/api-query-hook";
 import { toast } from "sonner";
 import styles from "./account-info.module.css";
 
 export const AccountInfo = () => {
-  const { data: accountData } = useQuery<GetAccountResponseType>({
-    queryKey: ["account"],
-  });
-
+  const { data: accountData } = useGetAccount();
   const { cvu, alias } = accountData || {};
 
   const data = [
