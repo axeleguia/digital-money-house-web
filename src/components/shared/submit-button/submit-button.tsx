@@ -5,12 +5,13 @@ import styles from "./submit-button.module.css";
 
 type SubmitButtonProps<T> = {
   label: string;
-  color?: "primary" | "secondary" | "tertiary" | "background" | "silver";
+  color?: "primary" | "secondary" | "tertiary" | "background";
   size?: "small" | "medium" | "large";
   width?: "full" | "default";
   icon?: boolean;
   onSubmit: (data: T) => void;
   isLoading?: boolean;
+  disabled?: boolean;
 };
 
 export const SubmitButton = <T extends FieldValues>({
@@ -21,6 +22,7 @@ export const SubmitButton = <T extends FieldValues>({
   width = "default",
   onSubmit,
   isLoading,
+  disabled,
 }: SubmitButtonProps<T>) => {
   const { handleSubmit } = useFormContext<T>();
   const cssSize: any = {
@@ -34,7 +36,6 @@ export const SubmitButton = <T extends FieldValues>({
     secondary: styles.secondary,
     tertiary: styles.tertiary,
     background: styles.background,
-    silver: styles.silver,
     undefined: "",
   };
   const cssWidth: any = {
@@ -50,9 +51,10 @@ export const SubmitButton = <T extends FieldValues>({
         ${cssColor[color!]}
         ${cssWidth[width!]}
         ${isLoading ? styles.disabled : ""}
+        ${disabled ? styles.disabled : ""}
       `}
       onClick={handleSubmit(onSubmit)}
-      disabled={isLoading}
+      disabled={disabled}
     >
       {label}
       {isLoading && <img src="/spinner.svg" alt="Loading" />}

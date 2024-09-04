@@ -1,4 +1,10 @@
-export const routes: { name: string; path: string }[] = [
+type RouteType = {
+  name: string;
+  path: string;
+  children?: RouteType[];
+};
+
+export const routes: RouteType[] = [
   {
     name: "Inicio",
     path: "/dashboard",
@@ -14,6 +20,16 @@ export const routes: { name: string; path: string }[] = [
   {
     name: "Cargar dinero",
     path: "/dashboard/deposits",
+    children: [
+      {
+        name: "Transferencia bancaria",
+        path: "/dashboard/deposits/account",
+      },
+      {
+        name: "Seleccionar tarjeta",
+        path: "/dashboard/deposits/cards",
+      },
+    ],
   },
   {
     name: "Pagar Servicios",

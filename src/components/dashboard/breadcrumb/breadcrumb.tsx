@@ -7,6 +7,7 @@ import MediaQuery from "react-responsive";
 import styles from "./breadcrumb.module.css";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/shared/skeleton/skeleton";
+import Link from "next/link";
 
 const Breadcrumb = () => {
   const pathname = usePathname();
@@ -14,10 +15,10 @@ const Breadcrumb = () => {
   return (
     currentRoute && (
       <MediaQuery maxWidth={834}>
-        <div className={styles.breadcrumb}>
+        <Link href={currentRoute.path} className={styles.breadcrumb}>
           <Icon icon="arrow" color="opaque" />
           <span>{currentRoute?.name}</span>
-        </div>
+        </Link>
       </MediaQuery>
     )
   );

@@ -1,0 +1,52 @@
+#selectCardForm {
+  position: relative;
+  padding: 30px;
+  margin-bottom: 30px;
+  background: var(--color-background);
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#selectCardForm > p {
+  color: var(--color-primary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 117%;
+}
+
+.input {
+  width: 310px;
+}
+
+.button {
+  align-self: end;
+  width: 233px;
+}
+
+#selectCardForm > svg {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.buttonMobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.buttonMobile > button {
+  flex: 0.5;
+  align-self: self-end;
+}
+
+@media (width <= 1440px) {
+  .input,
+  .button {
+    width: 100%;
+  }
+}

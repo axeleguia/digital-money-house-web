@@ -1,4 +1,4 @@
-import { Sidebar } from "@/components/dashboard/sidebar/sidebar";
+import { Sidebar } from "@/components/shared/sidebar/sidebar/sidebar";
 import { Alert } from "@/components/shared/alert/alert";
 import styles from "./dashboard.module.css";
 import Breadcrumb from "@/components/dashboard/breadcrumb/breadcrumb";

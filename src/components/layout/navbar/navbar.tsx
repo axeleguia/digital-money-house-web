@@ -2,9 +2,9 @@
 
 import { ProfileHeader } from "@/components/layout/profile-header/profile-header";
 import { Button } from "@/components/shared/button/button";
+import { Icon } from "@/components/shared/icons/icons";
 import { useGetAccount, useGetAccountUser } from "@/hooks/api-query-hook";
 import Link from "next/link";
-import { Logo } from "../logo/logo";
 import styles from "./navbar.module.css";
 
 type NavbarProps = {
@@ -25,7 +25,10 @@ export const Navbar = ({ color = "primary", pathname }: NavbarProps) => {
   return (
     <nav id={styles.nav} className={cssColor[color]}>
       <Link href={"/"}>
-        <Logo color={color === "primary" ? "background" : "primary"} />
+        <Icon
+          icon="logo"
+          color={color === "primary" ? "background" : "primary"}
+        />
       </Link>
       <div>
         {pathname === "/" && (

@@ -19,6 +19,10 @@ import {
   PatchUserResponseType,
 } from "@/types/user.types";
 import httpProxyService from "./common/http-proxy.service";
+import {
+  PostAccountDepositsRequestType,
+  PostAccountDepositsResponseType,
+} from "@/types/account-deposits.types";
 
 class ApiService {
   // Internal Routes
@@ -76,6 +80,15 @@ class ApiService {
     httpProxyService.httpDelete<{ account_id: number; card_id: number }, any>(
       `/accounts/${account_id}/cards/${card_id}`
     );
+
+  postAccountDeposits = async (
+    account_id: number,
+    depositRequest: PostAccountDepositsRequestType
+  ) =>
+    httpProxyService.httpPost<
+      PostAccountDepositsRequestType,
+      PostAccountDepositsResponseType
+    >(`/accounts/${account_id}/deposits`, depositRequest);
 
   getUser = async ({ user_id }: GetUserRequestType) =>
     httpProxyService.httpGet<GetUserResponseType>(`/users/${user_id}`);

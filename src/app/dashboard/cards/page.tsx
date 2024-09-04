@@ -1,5 +1,13 @@
-import { CardsPage } from "@/components/cards/cards-page/cards-page";
+import { CardContainer } from "@/components/cards/card-container/card-container";
+import { PageLayout } from "@/components/shared/page-layout/page-layout";
+import { CardStoreProvider } from "@/providers/card-store.provider";
 
 export default async function Page() {
-  return <CardsPage />;
+  return (
+    <PageLayout>
+      <CardStoreProvider>
+        <CardContainer />
+      </CardStoreProvider>
+    </PageLayout>
+  );
 }

@@ -1,0 +1,47 @@
+.selectCardItem {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid var(--color-background);
+  padding: 20px 0;
+  color: var(--color-black);
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.description {
+  flex: auto;
+  font-size: 16px;
+}
+
+.select > input[type="radio"] {
+  appearance: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select > input[type="radio"]:checked {
+  background-color: var(--color-primary);
+  accent-color: var(--color-black);
+}
+
+.select > input[type="radio"]:checked:before {
+  content: "";
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: var(--color-black);
+}

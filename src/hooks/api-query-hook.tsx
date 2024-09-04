@@ -1,13 +1,27 @@
 import apiService from "@/services/api.service";
+import { PostAccountDepositsRequestType } from "@/types/account-deposits.types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
+import { toast } from "sonner";
+
+export enum QueryKeys {
+  ACCOUNT = "account",
+  USER = "user",
+  CARDS = "cards",
+}
+
+export const useGetQuery = <T,>(keys: QueryKeys) => {
+  const queryClient = useQueryClient();
+  return queryClient.getQueryData<T>([keys]);
+};
 
 export const useGetAccount = () => {
   const pathname = usePathname();
   const { data, isFetching } = useQuery({
     queryKey: ["account"],
     queryFn: async () => apiService.getAccount(),
-    enabled: pathname == "/dashboard",
+    // enabled: pathname === "/dashboard",
+    retryDelay: 3000,
   });
   return { data, isFetching };
 };
@@ -56,7 +70,7 @@ export const useUpdateAccountUser = (user_id: number) => {
 
 export const useCreateAccountCards = (
   account_id: number,
-  cardRequest: PostAccountCardsRequestType,
+  cardRequest: PostAccountCardsRequestType
 ) => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -66,8 +80,12 @@ export const useCreateAccountCards = (
     onSuccess: (data) => {
       queryClient.setQueryData(
         ["cards"],
-        (cards: GetAccountCardsResponseType[]) => [...cards, data],
+        (cards: GetAccountCardsResponseType[]) => [...cards, data]
       );
+      toast.message("Tarjeta registrada");
+    },
+    onError: (e) => {
+      toast.message("Ocurrio un problema al registrar la tarjeta");
     },
   });
 };
@@ -78,15 +96,39 @@ export const useDeleteAccountCards = () => {
     mutationFn: async (variables: { account_id: number; card_id: number }) => {
       return await apiService.deleteAccountCards(
         variables.account_id,
-        variables.card_id,
+        variables.card_id
       );
     },
     onSuccess: (data, variables) => {
       queryClient.setQueryData(
         ["cards"],
-        (cards: GetAccountCardsResponseType[]) =>
-          cards.filter((card) => card.id !== variables.card_id),
+        (cards: GetAccountCardsResponseType[]) => {
+          const filter = cards.filter((card) => card.id !== variables.card_id);
+          const size = filter.length;
+          if (size === 0) toast.message("No tienes tarjetas asociadas");
+          return filter;
+        }
       );
+    },
+  });
+};
+
+export const useCreateAccountDeposits = () => {
+  return useMutation({
+    mutationFn: async (variables: {
+      account_id: number;
+      depositRequest: PostAccountDepositsRequestType;
+    }) => {
+      return await apiService.postAccountDeposits(
+        variables.account_id,
+        variables.depositRequest
+      );
+    },
+    onSuccess: () => {
+      toast.message("Depósito registrado");
+    },
+    onError: (e) => {
+      toast.message("Ocurrio un problema al registrar el depósito");
     },
   });
 };

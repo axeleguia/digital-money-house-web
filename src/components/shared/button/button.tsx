@@ -2,11 +2,12 @@ import styles from "./button.module.css";
 
 type ButtonProps = {
   label: string;
-  color?: "primary" | "secondary" | "tertiary" | "background" | "silver";
+  color?: "primary" | "secondary" | "tertiary" | "background" | "gray";
   size?: "small" | "medium" | "large" | "extralarge";
   width?: "full" | "default";
   onClick?: () => void;
   loading?: boolean;
+  disabled?: boolean;
 };
 
 export const Button = ({
@@ -16,6 +17,7 @@ export const Button = ({
   width = "default",
   onClick,
   loading = false,
+  disabled,
 }: ButtonProps) => {
   const cssSize: any = {
     small: styles.small,
@@ -29,7 +31,7 @@ export const Button = ({
     secondary: styles.secondary,
     tertiary: styles.tertiary,
     background: styles.background,
-    silver: styles.silver,
+    gray: styles.gray,
     undefined: "",
   };
   const cssWidth: any = {
@@ -44,8 +46,10 @@ export const Button = ({
         ${cssSize[size!]}
         ${cssColor[color!]}
         ${cssWidth[width!]}
+        ${disabled ? styles.disabled : ""}
       `}
       onClick={onClick}
+      disabled={disabled}
     >
       {label}
       {loading && <img src="/spinner.svg" alt="Loading" />}

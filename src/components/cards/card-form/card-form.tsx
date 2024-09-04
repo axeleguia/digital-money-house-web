@@ -1,10 +1,16 @@
 "use client";
 
+import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
 import { Icon } from "@/components/shared/icons/icons";
 import { Input } from "@/components/shared/input/input";
 import { SubmitButton } from "@/components/shared/submit-button/submit-button";
-import { useCreateAccountCards, useGetAccount } from "@/hooks/api-query-hook";
+import {
+  QueryKeys,
+  useCreateAccountCards,
+  useGetQuery,
+} from "@/hooks/api-query-hook";
 import { useCardStore } from "@/providers/card-store.provider";
+import { GetAccountResponseType } from "@/types/account.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import Cards, { Focused } from "react-credit-cards-2";
@@ -13,11 +19,16 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import styles from "./card-form.module.css";
 import "./card.scss";
-import { usePathname } from "next/navigation";
 
-export const CardForm = () => {
-  const toggle = useCardStore((state) => state.toggle);
-  const { data } = useGetAccount();
+type CardFormProps = {
+  nextStep: CardSteps;
+};
+
+export const CardForm = ({ nextStep }: CardFormProps) => {
+  const setStep = useCardStore((state) => state.setStep);
+
+  const accountData = useGetQuery<GetAccountResponseType>(QueryKeys.ACCOUNT);
+  const { id: account_id } = accountData || {};
 
   const [state, setState] = useState({
     number: "",
@@ -39,7 +50,6 @@ export const CardForm = () => {
     resolver: zodResolver(schema),
   });
   const {
-    control,
     handleSubmit,
     formState: { errors },
     watch,
@@ -66,23 +76,23 @@ export const CardForm = () => {
     cod: Number(state.cvc),
   };
 
-  const { mutate } = useCreateAccountCards(data?.id!, cardRequest);
+  const { mutate } = useCreateAccountCards(account_id!, cardRequest);
 
   const onSubmit = (data: FormData) => {
     mutate(
       {},
       {
         onSuccess: () => {
-          toggle(false);
+          setStep(nextStep);
         },
-      },
+      }
     );
   };
 
   return (
     <FormProvider {...controls}>
       <form id={styles.cardForm} onSubmit={handleSubmit(onSubmit)}>
-        <Icon icon="close" color="opaque" onClick={() => toggle(false)} />
+        <Icon icon="close" color="opaque" onClick={() => setStep(nextStep)} />
         <Cards
           number={state.number}
           expiry={state.expiry}
@@ -122,7 +132,7 @@ export const CardForm = () => {
             </div>
             <SubmitButton
               label="Continuar"
-              color="silver"
+              color="primary"
               size="large"
               width="full"
               onSubmit={onSubmit}

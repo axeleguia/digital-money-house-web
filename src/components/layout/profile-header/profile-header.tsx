@@ -1,7 +1,7 @@
 "use client";
 
-import { SidebarMobile } from "@/components/dashboard/sidebar-mobile/sidebar-mobile";
 import { Icon } from "@/components/shared/icons/icons";
+import { SidebarMobile } from "@/components/shared/sidebar/sidebar-mobile/sidebar-mobile";
 import { useAppStore } from "@/providers/app-store-provider";
 import MediaQuery from "react-responsive";
 import styles from "./profile-header.module.css";
