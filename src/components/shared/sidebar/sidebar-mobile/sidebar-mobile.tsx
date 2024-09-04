@@ -1,9 +1,9 @@
 "use client";
 
 import { Icon } from "@/components/shared/icons/icons";
+import { Menu } from "@/components/shared/sidebar/menu/menu";
 import { useAppStore } from "@/providers/app-store-provider";
 import MediaQuery from "react-responsive";
-import { Menu } from "../menu/menu";
 import styles from "./sidebar-mobile.module.css";
 
 type SidebarMobileProps = {

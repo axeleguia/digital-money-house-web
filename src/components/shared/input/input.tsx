@@ -1,5 +1,5 @@
+import { ColorIcon, Icon, SvgIcon } from "@/components/shared/icons/icons";
 import { useFormContext } from "react-hook-form";
-import { ColorIcon, Icon, SvgIcon } from "../icons/icons";
 import styles from "./input.module.css";
 
 type InputProps = {
@@ -12,6 +12,7 @@ type InputProps = {
   icon?: SvgIcon;
   iconColor?: ColorIcon;
 };
+
 export const Input = ({
   fieldName,
   type,

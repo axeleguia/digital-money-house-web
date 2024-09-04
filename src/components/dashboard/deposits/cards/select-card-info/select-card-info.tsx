@@ -1,3 +1,4 @@
+import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
 import { Button } from "@/components/shared/button/button";
 import { Icon } from "@/components/shared/icons/icons";
 import {
@@ -8,7 +9,6 @@ import {
 import { useCardStore } from "@/providers/card-store.provider";
 import { GetAccountResponseType } from "@/types/account.types";
 import { format } from "@formkit/tempo";
-import { CardSteps } from "../enum";
 import styles from "./select-card-info.module.css";
 
 type SelectCardInfoProps = {

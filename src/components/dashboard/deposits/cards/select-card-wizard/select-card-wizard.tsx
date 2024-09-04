@@ -1,12 +1,12 @@
 "use client";
 
 import { CardForm } from "@/components/cards/card-form/card-form";
+import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
+import { SelectCardForm } from "@/components/dashboard/deposits/cards/select-card-form/select-card-form";
+import { SelectCardInfo } from "@/components/dashboard/deposits/cards/select-card-info/select-card-info";
+import { SelectCardList } from "@/components/dashboard/deposits/cards/select-card-list/select-card-list";
+import { SelectCardVoucher } from "@/components/dashboard/deposits/cards/select-card-voucher/select-card-voucher";
 import { useCardStore } from "@/providers/card-store.provider";
-import { CardSteps } from "../enum";
-import { SelectCardForm } from "../select-card-form/select-card-form";
-import { SelectCardInfo } from "../select-card-info/select-card-info";
-import { SelectCardList } from "../select-card-list/select-card-list";
-import { SelectCardVoucher } from "../select-card-voucher/select-card-voucher";
 
 export const SelectCardWizard = () => {
   const step = useCardStore((state) => state.form.step);

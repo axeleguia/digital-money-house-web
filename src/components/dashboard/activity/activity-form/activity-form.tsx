@@ -1,10 +1,10 @@
 "use client";
 
+import { Input } from "@/components/shared/input/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Input } from "../../../shared/input/input";
 import styles from "./activity-form.module.css";
 
 export const ActivityForm = () => {

@@ -1,3 +1,4 @@
+import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
 import { Input } from "@/components/shared/input/input";
 import { SubmitButton } from "@/components/shared/submit-button/submit-button";
 import { useCardStore } from "@/providers/card-store.provider";
@@ -5,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import MediaQuery from "react-responsive";
 import { z } from "zod";
-import { CardSteps } from "../enum";
 import styles from "./select-card-form.module.css";
 
 export const SelectCardForm = () => {

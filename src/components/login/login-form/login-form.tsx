@@ -3,6 +3,7 @@
 import { Button } from "@/components/shared/button/button";
 import { Input } from "@/components/shared/input/input";
 import { Small } from "@/components/shared/small/small";
+import { SubmitButton } from "@/components/shared/submit-button/submit-button";
 import { NotFoundError, UnauthorizedError } from "@/interfaces/http-error";
 import apiService from "@/services/api.service";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +13,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import { SubmitButton } from "../../shared/submit-button/submit-button";
 import styles from "./login-form.module.css";
 
 export const LoginForm = () => {

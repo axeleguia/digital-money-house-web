@@ -16,11 +16,9 @@ export const useGetQuery = <T,>(keys: QueryKeys) => {
 };
 
 export const useGetAccount = () => {
-  const pathname = usePathname();
   const { data, isFetching } = useQuery({
     queryKey: ["account"],
     queryFn: async () => apiService.getAccount(),
-    // enabled: pathname === "/dashboard",
     retryDelay: 3000,
   });
   return { data, isFetching };
@@ -131,4 +129,13 @@ export const useCreateAccountDeposits = () => {
       toast.message("Ocurrio un problema al registrar el depósito");
     },
   });
+};
+
+export const useGetAccountActivity = (account_id: number) => {
+  const { data, isFetching } = useQuery({
+    queryKey: ["activity"],
+    queryFn: async () => apiService.getAccountActivity(account_id),
+    enabled: !!account_id,
+  });
+  return { data, isFetching };
 };

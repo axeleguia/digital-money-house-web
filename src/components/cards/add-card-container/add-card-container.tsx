@@ -1,4 +1,4 @@
-import { AddCardButton } from "../add-card-button/add-card-button";
+import { AddCardButton } from "@/components/cards/add-card-button/add-card-button";
 import styles from "./add-card-container.module.css";
 
 type AddCardProps = {

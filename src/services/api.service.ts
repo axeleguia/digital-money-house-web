@@ -62,6 +62,15 @@ class ApiService {
   getAccount = async () =>
     httpProxyService.httpGet<GetAccountResponseType>("/account");
 
+  getUser = async ({ user_id }: GetUserRequestType) =>
+    httpProxyService.httpGet<GetUserResponseType>(`/users/${user_id}`);
+
+  patchUser = async (userRequest: PatchUserRequestType) =>
+    httpProxyService.httpPatch<PatchUserRequestType, PatchUserResponseType>(
+      `/users/${userRequest.id}`,
+      userRequest
+    );
+
   getAccountCards = async ({ account_id }: GetAccountCardsRequestType) =>
     httpProxyService.httpGet<GetAccountCardsResponseType[]>(
       `/accounts/${account_id}/cards`
@@ -90,13 +99,9 @@ class ApiService {
       PostAccountDepositsResponseType
     >(`/accounts/${account_id}/deposits`, depositRequest);
 
-  getUser = async ({ user_id }: GetUserRequestType) =>
-    httpProxyService.httpGet<GetUserResponseType>(`/users/${user_id}`);
-
-  patchUser = async (userRequest: PatchUserRequestType) =>
-    httpProxyService.httpPatch<PatchUserRequestType, PatchUserResponseType>(
-      `/users/${userRequest.id}`,
-      userRequest
+  getAccountActivity = async (account_id: number) =>
+    httpProxyService.httpGet<GetAccountActivityResponseType[]>(
+      `/accounts/${account_id}/activity`
     );
 }
 

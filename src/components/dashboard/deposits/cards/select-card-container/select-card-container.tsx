@@ -1,5 +1,5 @@
+import { SelectCardWizard } from "@/components/dashboard/deposits/cards/select-card-wizard/select-card-wizard";
 import { CardStoreProvider } from "@/providers/card-store.provider";
-import { SelectCardWizard } from "../select-card-wizard/select-card-wizard";
 
 export const SelectCardContainer = () => {
   return (

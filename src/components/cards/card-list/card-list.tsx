@@ -1,5 +1,5 @@
+import { CardItem } from "@/components/cards/card-item/card-item";
 import { List } from "@/components/shared/list/list";
-import { CardItem } from "../card-item/card-item";
 
 type CardListProps = {
   data: GetAccountCardsResponseType[];
