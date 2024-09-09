@@ -1,16 +1,11 @@
 "use client";
 
 import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
+import { Button } from "@/components/shared/button/button";
 import { Icon } from "@/components/shared/icons/icons";
 import { Input } from "@/components/shared/input/input";
-import { SubmitButton } from "@/components/shared/submit-button/submit-button";
-import {
-  QueryKeys,
-  useCreateAccountCards,
-  useGetQuery,
-} from "@/hooks/api-query-hook";
+import { useCreateAccountCards, useGetAccount } from "@/hooks/api-query-hook";
 import { useCardStore } from "@/providers/card-store.provider";
-import { GetAccountResponseType } from "@/types/account.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import Cards, { Focused } from "react-credit-cards-2";
@@ -25,10 +20,10 @@ type CardFormProps = {
 };
 
 export const CardForm = ({ nextStep }: CardFormProps) => {
-  const setStep = useCardStore((state) => state.setStep);
-
-  const accountData = useGetQuery<GetAccountResponseType>(QueryKeys.ACCOUNT);
+  const { data: accountData } = useGetAccount();
   const { id: account_id } = accountData || {};
+
+  const setStep = useCardStore((state) => state.setStep);
 
   const [state, setState] = useState({
     number: "",
@@ -130,13 +125,15 @@ export const CardForm = ({ nextStep }: CardFormProps) => {
                 width="full"
               />
             </div>
-            <SubmitButton
-              label="Continuar"
+            <Button
+              type="submit"
               color="primary"
               size="large"
               width="full"
               onSubmit={onSubmit}
-            />
+            >
+              Continuar
+            </Button>
           </div>
         </div>
       </form>

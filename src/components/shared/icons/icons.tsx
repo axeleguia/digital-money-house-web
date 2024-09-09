@@ -3,7 +3,8 @@ import styles from "./icons.module.css";
 export type SvgIcon =
   | "logo"
   | "arrow-right"
-  | "arrow"
+  | "caret-right"
+  | "caret-down"
   | "close"
   | "menu"
   | "copy"
@@ -13,7 +14,10 @@ export type SvgIcon =
   | "add"
   | "profile"
   | "card"
-  | "edit";
+  | "edit"
+  | "money"
+  | "filter"
+  | "spinner";
 
 export type ColorIcon =
   | "background"
@@ -74,19 +78,35 @@ const ArrowRightIcon = ({ color = "black", onClick }: IconProps) => (
   </svg>
 );
 
-const ArrowIcon = ({ color = "black", onClick }: IconProps) => (
+const CaretRightIcon = ({ color = "black", onClick }: IconProps) => (
   <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
+    width="8"
+    height="13"
+    viewBox="0 0 8 13"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...(onClick && { onClick })}
+    className={cssColor[color]}
+  >
+    <path d="M1 12L7 6.5L1 1" stroke="black" strokeOpacity="0.5" />
+  </svg>
+);
+
+const CaretDownIcon = ({ color = "black", onClick }: IconProps) => (
+  <svg
+    width="11"
+    height="7"
+    viewBox="0 0 11 7"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...(onClick && { onClick })}
     className={cssColor[color]}
   >
     <path
-      d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5L2 10.5ZM21.0607 13.0607C21.6464 12.4749 21.6464 11.5251 21.0607 10.9393L11.5147 1.3934C10.9289 0.807611 9.97918 0.807611 9.3934 1.3934C8.80761 1.97918 8.80761 2.92893 9.3934 3.51472L17.8787 12L9.3934 20.4853C8.80761 21.0711 8.80761 22.0208 9.3934 22.6066C9.97919 23.1924 10.9289 23.1924 11.5147 22.6066L21.0607 13.0607ZM2 13.5L20 13.5L20 10.5L2 10.5L2 13.5Z"
-      fill="currentColor"
+      d="M1 1L5.5 5L10 1"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
   </svg>
 );
@@ -201,10 +221,15 @@ const PencilIcon = ({ color = "black", onClick }: IconProps) => (
   </svg>
 );
 
-const SuccessIcon = ({ color = "black", onClick }: IconProps) => (
+const SuccessIcon = ({
+  color = "black",
+  width,
+  height,
+  onClick,
+}: IconProps) => (
   <svg
-    width="92"
-    height="95"
+    width={width ? width : 92}
+    height={height ? height : 95}
     viewBox="0 0 92 95"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -346,7 +371,91 @@ const EditIcon = ({ color = "black", onClick }: IconProps) => (
   </svg>
 );
 
+const MoneyIcon = ({ color = "black", onClick }: IconProps) => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 30 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...(onClick && { onClick })}
+    className={cssColor[color]}
+  >
+    <g>
+      <path
+        d="M24.26,20.34c0,3.42-2.423,6.342-6.845,7.111v3.92h-3.768v-3.648c-2.578-0.117-5.076-0.811-6.537-1.654l1.154-4.5
+		c1.615,0.886,3.883,1.693,6.383,1.693c2.191,0,3.691-0.848,3.691-2.385c0-1.461-1.23-2.389-4.077-3.348
+		c-4.112-1.385-6.921-3.306-6.921-7.033c0-3.386,2.385-6.035,6.499-6.845V0h3.767v3.383c2.576,0.115,4.309,0.652,5.576,1.268
+		l-1.115,4.348C21.07,8.575,19.3,7.688,16.531,7.688c-2.5,0-3.307,1.076-3.307,2.154c0,1.268,1.346,2.074,4.613,3.307
+		C22.416,14.762,24.26,16.877,24.26,20.34z"
+        fill="currentColor"
+      />
+    </g>
+  </svg>
+);
+
+const FilterIcon = ({ color = "black", onClick }: IconProps) => (
+  <svg
+    width="17"
+    height="13"
+    viewBox="0 0 17 13"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...(onClick && { onClick })}
+    className={cssColor[color]}
+  >
+    <line y1="9.7002" x2="17" y2="9.7002" stroke="#201F22" />
+    <line x1="17" y1="2.7666" x2="-4.37114e-08" y2="2.7666" stroke="#201F22" />
+    <circle
+      cx="5.09896"
+      cy="9.63314"
+      r="2.33333"
+      fill="currentColor"
+      stroke="#201F22"
+    />
+    <circle
+      cx="11.901"
+      cy="2.83366"
+      r="2.33333"
+      transform="rotate(-180 11.901 2.83366)"
+      fill="currentColor"
+      stroke="#201F22"
+    />
+  </svg>
+);
+
+export const SpinnerIcon = ({ color = "black", onClick }: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    viewBox="0 0 24 24"
+    {...(onClick && { onClick })}
+    className={cssColor[color]}
+  >
+    <path
+      fill="currentColor"
+      d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+      opacity={0.25}
+    ></path>
+    <path
+      fill="currentColor"
+      d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"
+    >
+      <animateTransform
+        attributeName="transform"
+        dur="0.75s"
+        repeatCount="indefinite"
+        type="rotate"
+        values="0 12 12;360 12 12"
+      ></animateTransform>
+    </path>
+  </svg>
+);
+
 type IconProps = {
+  width?: string;
+  height?: string;
   icon?: SvgIcon;
   color?: ColorIcon;
   onClick?: () => void;
@@ -356,7 +465,8 @@ export const Icon = (props: IconProps): JSX.Element => {
   const svgs: any = {
     logo: <LogoIcon {...props} />,
     "arrow-right": <ArrowRightIcon {...props} />,
-    arrow: <ArrowIcon {...props} />,
+    "caret-right": <CaretRightIcon {...props} />,
+    "caret-down": <CaretDownIcon {...props} />,
     close: <CloseIcon {...props} />,
     menu: <MenuIcon {...props} />,
     copy: <CopyIcon {...props} />,
@@ -367,6 +477,9 @@ export const Icon = (props: IconProps): JSX.Element => {
     profile: <ProfileIcon {...props} />,
     card: <CardIcon {...props} />,
     edit: <EditIcon {...props} />,
+    money: <MoneyIcon {...props} />,
+    filter: <FilterIcon {...props} />,
+    spinner: <SpinnerIcon {...props} />,
   };
   return svgs[props.icon!];
 };

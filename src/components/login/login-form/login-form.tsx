@@ -1,14 +1,12 @@
 "use client";
 
 import { Button } from "@/components/shared/button/button";
+import { Icon } from "@/components/shared/icons/icons";
 import { Input } from "@/components/shared/input/input";
 import { Small } from "@/components/shared/small/small";
-import { SubmitButton } from "@/components/shared/submit-button/submit-button";
+import { useLogin } from "@/hooks/api-query-hook";
 import { NotFoundError, UnauthorizedError } from "@/interfaces/http-error";
-import apiService from "@/services/api.service";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -16,24 +14,7 @@ import { z } from "zod";
 import styles from "./login-form.module.css";
 
 export const LoginForm = () => {
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (variables: { email: string; password: string }) => {
-      await apiService.loginInternal({
-        email: variables.email,
-        password: variables.password,
-      });
-    },
-    onSuccess: () => {
-      router.push("/dashboard");
-    },
-    onError: (e) => {
-      if (e instanceof NotFoundError) {
-        setError("Usuario inexistente. Vuelve a intentarlo");
-      } else if (e instanceof UnauthorizedError) {
-        setError("Credenciales invalidas. Vuelve a intentarlo");
-      }
-    },
-  });
+  const { mutate, isPending } = useLogin();
 
   const router = useRouter();
   const [hasEmail, setHasEmail] = useState(false);
@@ -49,7 +30,7 @@ export const LoginForm = () => {
   });
   const {
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, isSubmitting },
   } = controls;
 
   const onSubmit = async (data: FormData) => {
@@ -60,7 +41,21 @@ export const LoginForm = () => {
       return;
     }
     if (isValid) {
-      mutate({ email, password });
+      mutate(
+        { email, password },
+        {
+          onSuccess: () => {
+            router.push("/dashboard");
+          },
+          onError: (e) => {
+            if (e instanceof NotFoundError) {
+              setError("Usuario inexistente. Vuelve a intentarlo");
+            } else if (e instanceof UnauthorizedError) {
+              setError("Credenciales invalidas. Vuelve a intentarlo");
+            }
+          },
+        }
+      );
     }
   };
 
@@ -82,23 +77,27 @@ export const LoginForm = () => {
           width="full"
           display={hasEmail}
         />
-        <SubmitButton
-          label="Continuar"
+        <Button
+          type="submit"
           color="primary"
           size="large"
           width="full"
           onSubmit={onSubmit}
-          isLoading={isPending}
-        />
+          disabled={isPending}
+        >
+          Continuar
+          {isPending && <Icon icon="spinner" color="tertiary" />}
+        </Button>
         {!hasEmail && (
-          <Link href="/register">
-            <Button
-              label="Crear cuenta"
-              color="tertiary"
-              size="large"
-              width="full"
-            />
-          </Link>
+          <Button
+            type="link"
+            color="tertiary"
+            size="large"
+            width="full"
+            href="/register"
+          >
+            Crear cuenta
+          </Button>
         )}
         {error && <Small text={error} invalid={true} textAlign="center" />}
       </form>

@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  flex: auto;
 }
 
 .icon {
@@ -15,7 +16,7 @@
   padding: 20px;
   border: 2px solid var(--color-input-border);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   &:focus {
     outline: none;
   }

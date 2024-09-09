@@ -1,14 +1,7 @@
-.addCard {
-  background-color: var(--color-background);
-  border-radius: 10px;
-  padding: 40px 30px;
-  margin-bottom: 20px;
-}
-
 .addCard > p {
   font-size: 16px;
   line-height: 138%;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   margin-bottom: 30px;
   color: var(--color-white);
 }

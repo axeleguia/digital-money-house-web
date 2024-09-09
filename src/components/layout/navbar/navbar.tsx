@@ -33,18 +33,18 @@ export const Navbar = ({ color = "primary", pathname }: NavbarProps) => {
       <div>
         {pathname === "/" && (
           <>
-            <Link href={"/login"}>
-              <Button label="Ingresar" color="background" />
-            </Link>
-            <Link href={"/register"}>
-              <Button label="Crear cuenta" color="primary" />
-            </Link>
+            <Button type="link" color="background" href={"/login"}>
+              Ingresar
+            </Button>
+            <Button type="link" color="primary" href={"/register"}>
+              Crear cuenta
+            </Button>
           </>
         )}
         {pathname === "/register" && (
-          <Link href={"/login"}>
-            <Button label="Iniciar sesión" color="secondary" />
-          </Link>
+          <Button type="link" color="secondary" href={"/login"}>
+            Iniciar sesión
+          </Button>
         )}
         {userData && pathname.includes("/dashboard") && (
           <ProfileHeader firstname={firstname!} lastname={lastname!} />

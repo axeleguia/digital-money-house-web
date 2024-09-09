@@ -11,7 +11,7 @@
   font-size: 40px;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--color-primary);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .description {

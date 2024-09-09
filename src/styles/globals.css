@@ -41,6 +41,11 @@
   --font-text-normal: 14px;
   --font-text-small: 12px;
 
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --border-radius: 10px;
+
   --color-input-border: #d2ffec;
 }
 

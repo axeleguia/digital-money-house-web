@@ -5,7 +5,7 @@ export type CardState = {
   form: {
     step: CardSteps | undefined;
     card: GetAccountCardsResponseType | undefined;
-    amount: number;
+    amount: number | undefined;
     dated: string | undefined;
   };
 };
@@ -23,7 +23,7 @@ export const defaultInitialState: CardState = {
   form: {
     step: CardSteps.DEFAULT,
     card: undefined,
-    amount: 0,
+    amount: undefined,
     dated: undefined,
   },
 };

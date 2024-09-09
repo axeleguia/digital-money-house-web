@@ -6,7 +6,7 @@ import { useStore } from "zustand";
 
 export type AppStoreApi = ReturnType<typeof createAppStore>;
 export const AppStoreContext = createContext<AppStoreApi | undefined>(
-  undefined,
+  undefined
 );
 export interface AppStoreProviderProps {
   children: ReactNode;

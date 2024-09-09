@@ -4,17 +4,12 @@ import { AddCard } from "@/components/cards/add-card-container/add-card-containe
 import { CardForm } from "@/components/cards/card-form/card-form";
 import { CardList } from "@/components/cards/card-list/card-list";
 import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
-import {
-  QueryKeys,
-  useGetAccountCards,
-  useGetQuery,
-} from "@/hooks/api-query-hook";
+import { useGetAccount, useGetAccountCards } from "@/hooks/api-query-hook";
 import { useCardStore } from "@/providers/card-store.provider";
-import { GetAccountResponseType } from "@/types/account.types";
 
 export const CardContainer = () => {
   const step = useCardStore((state) => state.form.step);
-  const accountData = useGetQuery<GetAccountResponseType>(QueryKeys.ACCOUNT);
+  const { data: accountData } = useGetAccount();
   const { data: accountCardsData } = useGetAccountCards(accountData?.id!);
 
   return (

@@ -1,36 +1,58 @@
 import apiService from "@/services/api.service";
 import { PostAccountDepositsRequestType } from "@/types/account-deposits.types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { usePathname } from "next/navigation";
 import { toast } from "sonner";
 
-export enum QueryKeys {
-  ACCOUNT = "account",
-  USER = "user",
-  CARDS = "cards",
-}
+export const useLogin = () => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (variables: { email: string; password: string }) => {
+      await apiService.loginInternal({
+        email: variables.email,
+        password: variables.password,
+      });
+    },
+  });
+  return { mutate, isPending };
+};
 
-export const useGetQuery = <T,>(keys: QueryKeys) => {
-  const queryClient = useQueryClient();
-  return queryClient.getQueryData<T>([keys]);
+export const useRegister = () => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (variables: {
+      dni: number;
+      email: string;
+      firstname: string;
+      lastname: string;
+      password: string;
+      phone: string;
+    }) => {
+      await apiService.registerInternal({
+        dni: variables.dni,
+        email: variables.email,
+        firstname: variables.firstname,
+        lastname: variables.lastname,
+        password: variables.password,
+        phone: variables.phone,
+      });
+    },
+  });
+  return { mutate, isPending };
 };
 
 export const useGetAccount = () => {
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isLoading } = useQuery({
     queryKey: ["account"],
     queryFn: async () => apiService.getAccount(),
-    retryDelay: 3000,
   });
-  return { data, isFetching };
+  return { data, isFetching, isLoading };
 };
 
 export const useGetAccountUser = (user_id: number) => {
-  const { data, isFetching, isSuccess, refetch } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ["user"],
     queryFn: async () => apiService.getUser({ user_id }),
     enabled: !!user_id,
   });
-  return { data, isFetching, isSuccess, refetch };
+  return { data, isFetching };
 };
 
 export const useGetAccountCards = (account_id: number) => {
@@ -136,6 +158,23 @@ export const useGetAccountActivity = (account_id: number) => {
     queryKey: ["activity"],
     queryFn: async () => apiService.getAccountActivity(account_id),
     enabled: !!account_id,
+  });
+  return { data, isFetching };
+};
+
+export const useGetAccountActivityById = (account_id: number, id: number) => {
+  const { data, isFetching } = useQuery({
+    queryKey: ["activity-detail"],
+    queryFn: async () => apiService.getAccountTransactionById(account_id, id),
+    enabled: !!account_id && !!id,
+  });
+  return { data, isFetching };
+};
+
+export const useGetServices = () => {
+  const { data, isFetching } = useQuery({
+    queryKey: ["payment-services"],
+    queryFn: async () => apiService.getServices(),
   });
   return { data, isFetching };
 };

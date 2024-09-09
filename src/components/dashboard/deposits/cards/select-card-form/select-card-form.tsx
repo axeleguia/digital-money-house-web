@@ -1,14 +1,16 @@
 import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
+import { Button } from "@/components/shared/button/button";
 import { Input } from "@/components/shared/input/input";
-import { SubmitButton } from "@/components/shared/submit-button/submit-button";
+import useMediaQuery from "@/hooks/media-query";
 import { useCardStore } from "@/providers/card-store.provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import MediaQuery from "react-responsive";
 import { z } from "zod";
 import styles from "./select-card-form.module.css";
+import { Card } from "@/components/shared/card/card";
 
 export const SelectCardForm = () => {
+  const isMobile = useMediaQuery("(max-width: 834px)");
   const setStep = useCardStore((state) => state.setStep);
   const setAmount = useCardStore((state) => state.setAmount);
   const schema = z.object({
@@ -31,42 +33,53 @@ export const SelectCardForm = () => {
 
   return (
     <FormProvider {...controls}>
-      <form id={styles.selectCardForm} onSubmit={handleSubmit(onSubmit)}>
-        <p>¿Cuanto querés ingresar a la cuenta?</p>
-        <div className={styles.input}>
-          <Input
-            fieldName="amount"
-            type="text"
-            placeholder="$0"
-            size="normal"
-            width="full"
-          />
-        </div>
-        <MediaQuery minWidth={834}>
-          <div className={styles.button}>
-            <SubmitButton
-              label="Continuar"
+      <Card color="background">
+        <form
+          className={styles.selectCardForm}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <p>¿Cuanto querés ingresar a la cuenta?</p>
+          <div className={styles.input}>
+            <Input
+              fieldName="amount"
+              type="number"
+              placeholder="0"
+              size="normal"
+              width="full"
+              icon="money"
+              iconColor="gray"
+            />
+          </div>
+          {!isMobile && (
+            <div className={styles.button}>
+              <Button
+                type="submit"
+                color="primary"
+                size="large"
+                width="full"
+                onSubmit={onSubmit}
+                disabled={!isValid}
+              >
+                Continuar
+              </Button>
+            </div>
+          )}
+        </form>
+        {isMobile && (
+          <div className={styles.buttonMobile}>
+            <Button
+              type="submit"
               color="primary"
               size="large"
               width="full"
               onSubmit={onSubmit}
               disabled={!isValid}
-            />
+            >
+              Continuar
+            </Button>
           </div>
-        </MediaQuery>
-      </form>
-      <MediaQuery maxWidth={834}>
-        <div className={styles.buttonMobile}>
-          <SubmitButton
-            label="Continuar"
-            color="primary"
-            size="large"
-            width="full"
-            onSubmit={onSubmit}
-            disabled={!isValid}
-          />
-        </div>
-      </MediaQuery>
+        )}
+      </Card>
     </FormProvider>
   );
 };

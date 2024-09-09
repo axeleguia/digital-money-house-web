@@ -1,13 +1,13 @@
 "use client";
 
+import { Card } from "@/components/shared/card/card";
 import { Icon } from "@/components/shared/icons/icons";
-import { QueryKeys, useGetQuery } from "@/hooks/api-query-hook";
-import { GetAccountResponseType } from "@/types/account.types";
+import { useGetAccount } from "@/hooks/api-query-hook";
 import { toast } from "sonner";
 import styles from "./account-info.module.css";
 
 export const AccountInfo = () => {
-  const accountData = useGetQuery<GetAccountResponseType>(QueryKeys.ACCOUNT);
+  const { data: accountData } = useGetAccount();
   const { cvu, alias } = accountData || {};
 
   const data = [
@@ -21,7 +21,7 @@ export const AccountInfo = () => {
   };
 
   return (
-    <div className={styles.accountInfo}>
+    <Card color="background" className={styles.accountInfo}>
       <p>
         Copia tu cvu o alias para ingresar o transferir dinero desde otra cuenta
       </p>
@@ -30,7 +30,7 @@ export const AccountInfo = () => {
           <li key={item.title}>
             <div className={styles.data}>
               <p className={styles.title}>{item.title}</p>
-              <p>{item.value}</p>
+              <p className={styles.value}>{item.value}</p>
             </div>
             <div
               className={styles.icon}
@@ -41,6 +41,6 @@ export const AccountInfo = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 };

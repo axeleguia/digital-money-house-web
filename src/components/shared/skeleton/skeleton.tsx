@@ -1,9 +1,10 @@
 type SkeletonProps = {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  marginBottom?: number;
 };
 
-export const Skeleton = ({ width, height }: SkeletonProps) => {
+export const Skeleton = ({ width, height, marginBottom }: SkeletonProps) => {
   return (
     <div
       style={{
@@ -12,6 +13,7 @@ export const Skeleton = ({ width, height }: SkeletonProps) => {
         backgroundColor: "var(--color-gray)",
         borderRadius: "4px",
         opacity: "0.5",
+        marginBottom: marginBottom ? `${marginBottom}px` : "0",
       }}
     ></div>
   );

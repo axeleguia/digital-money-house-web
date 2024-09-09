@@ -6,7 +6,7 @@ export const PaymentMethods = () => {
   return (
     <Link href={"/dashboard/cards"} className={styles.paymentMethods}>
       <span>Gestioná los medios de pago</span>
-      <Icon icon="arrow" color="black" />
+      <Icon icon="arrow-right" color="black" />
     </Link>
   );
 };

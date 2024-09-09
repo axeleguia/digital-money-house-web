@@ -2,8 +2,9 @@
 
 import { Icon } from "@/components/shared/icons/icons";
 import { Menu } from "@/components/shared/sidebar/menu/menu";
+import useMediaQuery from "@/hooks/media-query";
 import { useAppStore } from "@/providers/app-store-provider";
-import MediaQuery from "react-responsive";
+import { useEffect } from "react";
 import styles from "./sidebar-mobile.module.css";
 
 type SidebarMobileProps = {
@@ -14,26 +15,31 @@ type SidebarMobileProps = {
 export const SidebarMobile = ({ firstname, lastname }: SidebarMobileProps) => {
   const sidebarIsOpen = useAppStore((state) => state.sidebarIsOpen);
   const toggle = useAppStore((state) => state.toggle);
-  const handleMediaQueryChange = (matches: boolean) => matches && toggle(false);
+  const isMobile = useMediaQuery("(max-width: 834px)");
+
+  useEffect(() => {
+    if (!isMobile) {
+      toggle(false);
+    }
+  }, [isMobile]);
 
   return (
-    sidebarIsOpen && (
-      <MediaQuery maxWidth={834} onChange={handleMediaQueryChange}>
-        <aside className={styles.sidebarMobile}>
-          <div>
-            <div className={styles.greeting}>
-              Hola, <br />
-              {firstname} {lastname}
-            </div>
-            <Icon
-              icon="close"
-              color="primary"
-              onClick={() => toggle(!sidebarIsOpen)}
-            />
+    sidebarIsOpen &&
+    isMobile && (
+      <aside className={styles.sidebarMobile}>
+        <div>
+          <div className={styles.greeting}>
+            Hola, <br />
+            {firstname} {lastname}
           </div>
-          <Menu />
-        </aside>
-      </MediaQuery>
+          <Icon
+            icon="close"
+            color="primary"
+            onClick={() => toggle(!sidebarIsOpen)}
+          />
+        </div>
+        <Menu />
+      </aside>
     )
   );
 };

@@ -1,7 +1,9 @@
 "use client";
+
+import { Button } from "@/components/shared/button/button";
 import { Input } from "@/components/shared/input/input";
 import { Small } from "@/components/shared/small/small";
-import { SubmitButton } from "@/components/shared/submit-button/submit-button";
+import { useRegister } from "@/hooks/api-query-hook";
 import apiService from "@/services/api.service";
 import { hasPasswordConstraint } from "@/utils/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +14,7 @@ import { z } from "zod";
 import styles from "./register-form.module.css";
 
 export const RegisterForm = () => {
+  const { mutate } = useRegister();
   const router = useRouter();
   const [error, setError] = useState("");
   const schema = z.object({
@@ -45,20 +48,22 @@ export const RegisterForm = () => {
 
   const onSubmit = async (data: FormData) => {
     setError("");
-    try {
-      const { dni, email, firstname, lastname, password, phone } = data;
-      await apiService.registerInternal({
+    const { dni, email, firstname, lastname, password, phone } = data;
+    mutate(
+      {
         dni,
         email,
         firstname,
         lastname,
         password,
         phone,
-      });
-      router.push("/register/success");
-    } catch (e) {
-      setError("Error al enviar el formulario. Vuelve a intentarlo");
-    }
+      },
+      {
+        onSuccess: () => router.push("/register/success"),
+        onError: () =>
+          setError("Error al enviar el formulario. Vuelve a intentarlo"),
+      }
+    );
   };
 
   return (
@@ -110,13 +115,15 @@ export const RegisterForm = () => {
             placeholder="Teléfono*"
             width="full"
           />
-          <SubmitButton
-            label="Crear cuenta"
+          <Button
+            type="submit"
             color="primary"
             size="large"
             width="full"
             onSubmit={onSubmit}
-          />
+          >
+            Crear cuenta
+          </Button>
           <div></div>
           <div className={styles.message}>
             {error && <Small text={error} invalid={true} textAlign="center" />}

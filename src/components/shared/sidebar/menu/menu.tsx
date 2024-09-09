@@ -9,11 +9,11 @@ export const Menu = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const navigateTo = async (pathname: string) => {
+  const navigateTo = (pathname: string) => {
     if (pathname == "/logout") {
-      console.log("logout");
-      await apiService.logoutInternal();
+      apiService.logoutInternal();
       router.push("/");
+      router.refresh();
     } else {
       router.push(pathname);
     }

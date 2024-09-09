@@ -12,7 +12,7 @@ type AddCardButtonProps = {
   type?: "simple" | "form";
 };
 
-const MAX_CARDS = 3;
+const MAX_CARDS = 10;
 
 export const AddCardButton = ({ size, type }: AddCardButtonProps) => {
   const buttonType = {
@@ -57,12 +57,14 @@ const AddCardButtonForm = ({ size }: AddCardButtonProps) => {
         <div className={styles.title}>Nueva tarjeta</div>
       </div>
       <Button
-        label="Continuar"
+        type="button"
         color="primary"
         size="medium"
         onClick={() => setStep(CardSteps.SELECT_CARD_FORM)}
         disabled={card === undefined}
-      />
+      >
+        Continuar
+      </Button>
     </div>
   );
 };

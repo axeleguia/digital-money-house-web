@@ -8,10 +8,10 @@
 }
 
 #registerForm > h2 {
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 20px;
   text-align: center;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
 }
 
 #registerForm > div {

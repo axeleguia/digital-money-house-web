@@ -1,12 +1,22 @@
-import { PageLayout } from "@/components/shared/page-layout/page-layout";
 import { ActivityForm } from "@/components/dashboard/activity/activity-form/activity-form";
 import { ActivityList } from "@/components/dashboard/activity/activity-list/activity-list";
+import { ActivityStoreProvider } from "@/providers/activity-store-provider";
 
-export const ActivityContainer = () => {
+type ActivityContainerProps = {
+  showFilter?: boolean;
+  showViewAll?: boolean;
+  showPagination?: boolean;
+};
+
+export const ActivityContainer = ({
+  showFilter,
+  showViewAll,
+  showPagination,
+}: ActivityContainerProps) => {
   return (
-    <PageLayout>
-      <ActivityForm />
-      <ActivityList />
-    </PageLayout>
+    <ActivityStoreProvider>
+      <ActivityForm showFilter={showFilter} />
+      <ActivityList showViewAll={showViewAll} showPagination={showPagination} />
+    </ActivityStoreProvider>
   );
 };

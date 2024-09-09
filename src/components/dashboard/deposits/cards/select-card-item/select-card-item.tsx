@@ -1,5 +1,6 @@
 import { useCardStore } from "@/providers/card-store.provider";
 import styles from "./select-card-item.module.css";
+import { InputRadio } from "@/components/shared/input-radio/input-radio";
 
 type SelectCardItemProps = {
   data: GetAccountCardsResponseType;
@@ -15,10 +16,9 @@ export const SelectCardItem = ({ data }: SelectCardItemProps) => {
         Termina en {getLastDigits(number_id)}
       </div>
       <div className={styles.select}>
-        <input
-          type="radio"
+        <InputRadio
           name="card"
-          value={id}
+          value={String(id)}
           onChange={() => setCard(data)}
         />
       </div>

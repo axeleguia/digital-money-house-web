@@ -3,7 +3,7 @@
   border-radius: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   font-style: normal;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   font-size: 14px;
   line-height: 19px;
   text-align: center;
@@ -36,7 +36,7 @@
 .small,
 .medium,
 .large {
-  border-radius: 10px;
+  border-radius: var(--border-radius);
 }
 
 .small {

@@ -1,5 +1,8 @@
 .search {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .search > svg {

@@ -2,7 +2,7 @@
 }
 .message {
   background-color: var(--color-primary);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   padding: 20px 30px;
   display: flex;
@@ -15,35 +15,5 @@
 .message > h3 {
   font-size: 24px;
   color: var(--color-black);
-  font-weight: 700;
-}
-
-.options {
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-}
-
-.options > div {
-  display: flex;
-  flex-direction: row;
-  width: 600px;
-  gap: 20px;
-}
-
-.options > div > a {
-  width: 100%;
-}
-
-@media (width <= 1440px) {
-  .options > div {
-    width: 100%;
-  }
-}
-
-@media (width < 834px) {
-  .options > div {
-    width: 100%;
-    flex-direction: column-reverse;
-  }
+  font-weight: var(--font-weight-bold);
 }

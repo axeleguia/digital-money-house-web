@@ -1,9 +1,0 @@
-#page {
-  margin: 30px 60px;
-}
-
-@media (width < 834px) {
-  #page {
-    margin: 20px;
-  }
-}

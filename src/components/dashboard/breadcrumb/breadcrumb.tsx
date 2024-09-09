@@ -1,41 +1,27 @@
 "use client";
 
 import { Icon } from "@/components/shared/icons/icons";
+import useMediaQuery from "@/hooks/media-query";
 import { routes } from "@/utils/routes";
-import { usePathname } from "next/navigation";
-import MediaQuery from "react-responsive";
-import styles from "./breadcrumb.module.css";
-import dynamic from "next/dynamic";
-import { Skeleton } from "@/components/shared/skeleton/skeleton";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import styles from "./breadcrumb.module.css";
 
-const Breadcrumb = () => {
+export const Breadcrumb = () => {
   const pathname = usePathname();
-  const currentRoute = routes.find((route) => route.path === pathname);
+  const currentRoute = routes.find(
+    (route) =>
+      route.path === pathname ||
+      route.children?.some((item) => item.path === pathname)
+  );
+  const isMobile = useMediaQuery("(max-width: 834px)");
   return (
-    currentRoute && (
-      <MediaQuery maxWidth={834}>
-        <Link href={currentRoute.path} className={styles.breadcrumb}>
-          <Icon icon="arrow" color="opaque" />
-          <span>{currentRoute?.name}</span>
-        </Link>
-      </MediaQuery>
+    currentRoute &&
+    isMobile && (
+      <Link href={currentRoute.path} className={styles.breadcrumb}>
+        <Icon icon="arrow-right" color="opaque" />
+        <span>{currentRoute?.name}</span>
+      </Link>
     )
   );
 };
-
-const BreadcrumbSkeleton = () => {
-  return (
-    <MediaQuery maxWidth={834}>
-      <div className={styles.breadcrumb}>
-        <Icon icon="arrow" color="opaque" />
-        <Skeleton width={100} height={24} />
-      </div>
-    </MediaQuery>
-  );
-};
-
-export default dynamic(() => Promise.resolve(Breadcrumb), {
-  ssr: false,
-  loading: () => <BreadcrumbSkeleton />,
-});

@@ -49,31 +49,31 @@ class ApiService {
 
   login = async (loginRequest: LoginRequestType) =>
     httpExternalService.httpPost<LoginRequestType, LoginResponseType>(
-      "/login",
+      "/api/login",
       loginRequest
     );
 
   register = async (registerRequest: RegisterRequestType) =>
     httpExternalService.httpPost<RegisterRequestType, RegisterResponseType>(
-      "/users",
+      "/api/users",
       registerRequest
     );
 
   getAccount = async () =>
-    httpProxyService.httpGet<GetAccountResponseType>("/account");
+    httpProxyService.httpGet<GetAccountResponseType>("/api/account");
 
   getUser = async ({ user_id }: GetUserRequestType) =>
-    httpProxyService.httpGet<GetUserResponseType>(`/users/${user_id}`);
+    httpProxyService.httpGet<GetUserResponseType>(`/api/users/${user_id}`);
 
   patchUser = async (userRequest: PatchUserRequestType) =>
     httpProxyService.httpPatch<PatchUserRequestType, PatchUserResponseType>(
-      `/users/${userRequest.id}`,
+      `/api/users/${userRequest.id}`,
       userRequest
     );
 
   getAccountCards = async ({ account_id }: GetAccountCardsRequestType) =>
     httpProxyService.httpGet<GetAccountCardsResponseType[]>(
-      `/accounts/${account_id}/cards`
+      `/api/accounts/${account_id}/cards`
     );
 
   postAccountCards = async (
@@ -83,11 +83,11 @@ class ApiService {
     httpProxyService.httpPost<
       PostAccountCardsRequestType,
       PostAccountCardsResponseType
-    >(`/accounts/${account_id}/cards`, cardRequest);
+    >(`/api/accounts/${account_id}/cards`, cardRequest);
 
   deleteAccountCards = async (account_id: number, card_id: number) =>
     httpProxyService.httpDelete<{ account_id: number; card_id: number }, any>(
-      `/accounts/${account_id}/cards/${card_id}`
+      `/api/accounts/${account_id}/cards/${card_id}`
     );
 
   postAccountDeposits = async (
@@ -97,12 +97,20 @@ class ApiService {
     httpProxyService.httpPost<
       PostAccountDepositsRequestType,
       PostAccountDepositsResponseType
-    >(`/accounts/${account_id}/deposits`, depositRequest);
+    >(`/api/accounts/${account_id}/deposits`, depositRequest);
 
   getAccountActivity = async (account_id: number) =>
     httpProxyService.httpGet<GetAccountActivityResponseType[]>(
-      `/accounts/${account_id}/activity`
+      `/api/accounts/${account_id}/activity`
     );
+
+  getAccountTransactionById = async (account_id: number, id: number) =>
+    httpProxyService.httpGet<GetAccountActivityResponseType>(
+      `/api/accounts/${account_id}/transactions/${id}`
+    );
+
+  getServices = async () =>
+    httpProxyService.httpGet<GetServiceResponseType[]>(`/service`);
 }
 
 const apiService = new ApiService();

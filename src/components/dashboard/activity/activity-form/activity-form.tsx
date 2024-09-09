@@ -5,9 +5,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
+import { ActivityFilter } from "../activity-filter/activity-filter";
 import styles from "./activity-form.module.css";
 
-export const ActivityForm = () => {
+type ActivityFormProps = {
+  showFilter?: boolean;
+};
+
+export const ActivityForm = ({ showFilter }: ActivityFormProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -25,7 +30,6 @@ export const ActivityForm = () => {
     if (pathname === "/dashboard") {
       router.push("/dashboard/activity");
     }
-    console.log(data);
   };
 
   return (
@@ -40,6 +44,7 @@ export const ActivityForm = () => {
             icon="search"
             iconColor="gray"
           />
+          {showFilter && <ActivityFilter />}
         </div>
       </form>
     </FormProvider>

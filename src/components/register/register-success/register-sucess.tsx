@@ -1,6 +1,5 @@
 import { Button } from "@/components/shared/button/button";
 import { Icon } from "@/components/shared/icons/icons";
-import Link from "next/link";
 import styles from "./register-success.module.css";
 
 export const RegisterSuccess = () => {
@@ -12,9 +11,9 @@ export const RegisterSuccess = () => {
         Hemos enviado un correo de confirmación para validar tu email, por favor
         revisalo para iniciar sesión
       </span>
-      <Link href={"/login"}>
-        <Button label="Continuar" color="primary" size="medium" />
-      </Link>
+      <Button type="link" color="primary" size="medium" href={"/login"}>
+        Continuar
+      </Button>
     </div>
   );
 };

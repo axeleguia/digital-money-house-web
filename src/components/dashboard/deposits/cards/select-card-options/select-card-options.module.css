@@ -1,0 +1,29 @@
+.selectCardOptions {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.selectCardOptions > div {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  gap: 20px;
+}
+
+.selectCardOptions > div > a {
+  width: 100%;
+}
+
+@media (width <= 1440px) {
+  .selectCardOptions > div {
+    width: 100%;
+  }
+}
+
+@media (width < 834px) {
+  .selectCardOptions > div {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+}

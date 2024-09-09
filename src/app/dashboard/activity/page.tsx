@@ -1,5 +1,11 @@
-import { ActivityPage } from "@/components/dashboard/activity/activity-page/activity-page";
+import { ActivityContainer } from "@/components/dashboard/activity/activity-container/activity-container";
 
 export default async function Page() {
-  return <ActivityPage />;
+  return (
+    <ActivityContainer
+      showFilter={true}
+      showViewAll={false}
+      showPagination={true}
+    />
+  );
 }

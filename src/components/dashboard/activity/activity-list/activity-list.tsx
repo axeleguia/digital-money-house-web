@@ -1,53 +1,64 @@
+"use client";
+
 import { ActivityItem } from "@/components/dashboard/activity/activity-item/activity-item";
 import { Icon } from "@/components/shared/icons/icons";
 import { List } from "@/components/shared/list/list";
+import { Pagination } from "@/components/shared/pagination/pagination";
+import { useActivityFiltered } from "@/hooks/activity-filter";
+import { useGetAccount, useGetAccountActivity } from "@/hooks/api-query-hook";
+import { usePagination } from "@/hooks/pagination";
+import { useActivityStore } from "@/providers/activity-store-provider";
 import Link from "next/link";
 import styles from "./activity-list.module.css";
 
-export const ActivityList = () => {
-  const items = [
-    {
-      id: 1,
-      title: "Transferiste a Rodrigo",
-      date: "Sábado",
-      amount: "-$ 1265,57",
-    },
-    {
-      title: "Transferiste a Rodrigo",
-      id: 2,
-      date: "Sábado",
-      amount: "-$ 1265,57",
-    },
-    {
-      id: 3,
-      title: "Transferiste a Consorcio",
-      date: "Sábado",
-      amount: "-$ 1265,57",
-    },
-    {
-      id: 4,
-      title: "Ingresaste dinero",
-      date: "Sábado",
-      amount: "-$ 1265,57",
-    },
-    {
-      id: 5,
-      title: "Te transfirieron dinero",
-      date: "Sábado",
-      amount: "-$ 1265,57",
-    },
-  ];
+const ITEMS_PER_PAGE = 5;
+
+type ActivityListProps = {
+  showPagination?: boolean;
+  showViewAll?: boolean;
+};
+
+export const ActivityList = ({
+  showPagination,
+  showViewAll,
+}: ActivityListProps) => {
+  const { data: accountData } = useGetAccount();
+  const { data } = useGetAccountActivity(accountData?.id!);
+  const reversedData = data?.toReversed();
+
+  const filter = useActivityStore((state) => state.form.filter);
+  const date = useActivityStore((state) => state.form.date);
+
+  const { filterActivityList } = useActivityFiltered(
+    reversedData!,
+    filter!,
+    date
+  );
+  const { currentItems, currentPage, totalPages, paginate } = usePagination(
+    filterActivityList!,
+    ITEMS_PER_PAGE
+  );
+
   return (
     <List title="Tu actividad">
       <ul>
-        {items.map((item) => (
-          <ActivityItem key={item.id} {...item} />
+        {currentItems?.map((item) => (
+          <ActivityItem key={item.id} data={item} />
         ))}
       </ul>
-      <Link href="/dashboard/activity" className={styles.viewAll}>
-        <div>Ver toda tu actividad</div>
-        <Icon icon="arrow-right" color="gray" />
-      </Link>
+      {showPagination && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          paginate={paginate}
+        />
+      )}
+      {showViewAll && (
+        <Link href="/dashboard/activity" className={styles.viewAll}>
+          <div>Ver toda tu actividad</div>
+          <Icon icon="arrow-right" color="gray" />
+        </Link>
+      )}
     </List>
   );
 };

@@ -1,19 +1,16 @@
 import { AddCardButton } from "@/components/cards/add-card-button/add-card-button";
 import { SelectCardItem } from "@/components/dashboard/deposits/cards/select-card-item/select-card-item";
+import { Card } from "@/components/shared/card/card";
 import { List } from "@/components/shared/list/list";
-import {
-  QueryKeys,
-  useGetAccountCards,
-  useGetQuery,
-} from "@/hooks/api-query-hook";
-import { GetAccountResponseType } from "@/types/account.types";
+import { useGetAccount, useGetAccountCards } from "@/hooks/api-query-hook";
 import styles from "./select-card-list.module.css";
 
 export const SelectCardList = () => {
-  const accountData = useGetQuery<GetAccountResponseType>(QueryKeys.ACCOUNT);
+  const { data: accountData } = useGetAccount();
   const { data } = useGetAccountCards(accountData?.id!);
+
   return (
-    <div className={styles.selectCardList}>
+    <Card className={styles.selectCardList} color="background">
       <h4>Seleccionar tarjeta</h4>
       <List title="Tus tarjetas">
         <ul>
@@ -21,6 +18,6 @@ export const SelectCardList = () => {
         </ul>
       </List>
       <AddCardButton size={data?.length!} type="form" />
-    </div>
+    </Card>
   );
 };

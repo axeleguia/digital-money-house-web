@@ -1,14 +1,17 @@
-import { ActivityForm } from "@/components/dashboard/activity/activity-form/activity-form";
+import { ActivityContainer } from "@/components/dashboard/activity/activity-container/activity-container";
 import { DashboardCardBalance } from "@/components/dashboard/dashboard/dashboard-card-balance/dashboard-card-balance";
 import { DashboardOptions } from "@/components/dashboard/dashboard/dashboard-options/dashboard-options";
-import { PageLayout } from "@/components/shared/page-layout/page-layout";
 
 export default async function Page() {
   return (
-    <PageLayout>
+    <>
       <DashboardCardBalance />
       <DashboardOptions />
-      <ActivityForm />
-    </PageLayout>
+      <ActivityContainer
+        showFilter={false}
+        showViewAll={true}
+        showPagination={false}
+      />
+    </>
   );
 }

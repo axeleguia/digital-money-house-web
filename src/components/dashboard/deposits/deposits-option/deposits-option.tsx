@@ -17,7 +17,7 @@ export const DepositsOption = ({
     <Link href={pathname} className={styles.depositOption}>
       <Icon icon={icon as SvgIcon} color="primary" />
       <div>{title}</div>
-      <Icon icon="arrow" color="primary" />
+      <Icon icon="arrow-right" color="primary" />
     </Link>
   );
 };

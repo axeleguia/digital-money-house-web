@@ -1,14 +1,13 @@
 "use client";
 
+import { Card } from "@/components/shared/card/card";
 import { Icon } from "@/components/shared/icons/icons";
 import { Small } from "@/components/shared/small/small";
 import {
-  QueryKeys,
+  useGetAccount,
   useGetAccountUser,
-  useGetQuery,
   useUpdateAccountUser,
 } from "@/hooks/api-query-hook";
-import { GetAccountResponseType } from "@/types/account.types";
 import { hasPasswordConstraint } from "@/utils/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -17,15 +16,9 @@ import { z } from "zod";
 import styles from "./profile-editor-form.module.css";
 
 export const ProfileEditorForm = () => {
-  const accountData = useGetQuery<GetAccountResponseType>(QueryKeys.ACCOUNT);
-  const {
-    data: userData,
-    isSuccess,
-    refetch,
-  } = useGetAccountUser(accountData?.user_id!);
-
+  const { data: accountData } = useGetAccount();
+  const { data: userData } = useGetAccountUser(accountData?.user_id!);
   const { id, firstname, lastname, dni, email, phone } = userData || {};
-
   const { mutate } = useUpdateAccountUser(accountData?.user_id!);
 
   const [selectedInput, setSelectedInput] = useState("");
@@ -81,6 +74,7 @@ export const ProfileEditorForm = () => {
         }
       }
       el.disabled = true;
+      setSelectedInput("");
     });
   };
 
@@ -92,8 +86,8 @@ export const ProfileEditorForm = () => {
   };
 
   return (
-    <div className={styles.profileEditorForm} onMouseLeave={cancelEdit}>
-      <h3>Tus datos</h3>
+    <Card className={styles.profileEditorForm} onMouseLeave={cancelEdit}>
+      <h3 className={styles.title}>Tus datos</h3>
       <FormProvider {...controls}>
         <form>
           <div className={styles.group}>
@@ -118,10 +112,10 @@ export const ProfileEditorForm = () => {
                 aria-invalid={errors.fullname ? true : false}
                 {...register("fullname", { disabled: true })}
               />
-              {isSuccess && (
+              {userData && (
                 <Icon
                   icon="pencil"
-                  color="silver"
+                  color={selectedInput === "fullname" ? "primary" : "silver"}
                   onClick={() => onEdit("fullname")}
                 />
               )}
@@ -138,10 +132,10 @@ export const ProfileEditorForm = () => {
                 aria-invalid={errors.cuit ? true : false}
                 {...register("cuit", { disabled: true })}
               />
-              {isSuccess && (
+              {userData && (
                 <Icon
                   icon="pencil"
-                  color="silver"
+                  color={selectedInput === "cuit" ? "primary" : "silver"}
                   onClick={() => onEdit("cuit")}
                 />
               )}
@@ -158,10 +152,10 @@ export const ProfileEditorForm = () => {
                 aria-invalid={errors.phone ? true : false}
                 {...register("phone", { disabled: true })}
               />
-              {isSuccess && (
+              {userData && (
                 <Icon
                   icon="pencil"
-                  color="silver"
+                  color={selectedInput === "phone" ? "primary" : "silver"}
                   onClick={() => onEdit("phone")}
                 />
               )}
@@ -179,10 +173,10 @@ export const ProfileEditorForm = () => {
                 aria-invalid={errors.password ? true : false}
                 {...register("password", { disabled: true })}
               />
-              {isSuccess && (
+              {userData && (
                 <Icon
                   icon="pencil"
-                  color="silver"
+                  color={selectedInput === "password" ? "primary" : "silver"}
                   onClick={() => onEdit("password")}
                 />
               )}
@@ -197,6 +191,6 @@ export const ProfileEditorForm = () => {
           />
         )}
       </FormProvider>
-    </div>
+    </Card>
   );
 };

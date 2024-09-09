@@ -1,15 +1,18 @@
 "use client";
 
 import { Menu } from "@/components/shared/sidebar/menu/menu";
-import MediaQuery from "react-responsive";
+import useMediaQuery from "@/hooks/media-query";
 import styles from "./sidebar.module.css";
 
 export const Sidebar = () => {
+  const isMobile = useMediaQuery("(max-width: 834px)");
   return (
-    <MediaQuery minWidth={834}>
-      <aside className={styles.sidebar}>
-        <Menu />
-      </aside>
-    </MediaQuery>
+    <>
+      {!isMobile && (
+        <aside className={styles.sidebar}>
+          <Menu />
+        </aside>
+      )}
+    </>
   );
 };

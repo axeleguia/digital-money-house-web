@@ -1,5 +1,5 @@
 import { HttpService } from "./http.service";
-const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
+const BASE_URL = "https://digitalmoney.digitalhouse.com";
 
 class HttpExternalService extends HttpService {
   constructor() {

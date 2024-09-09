@@ -2,12 +2,10 @@ import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
 import { Button } from "@/components/shared/button/button";
 import { Icon } from "@/components/shared/icons/icons";
 import {
-  QueryKeys,
   useCreateAccountDeposits,
-  useGetQuery,
+  useGetAccount,
 } from "@/hooks/api-query-hook";
 import { useCardStore } from "@/providers/card-store.provider";
-import { GetAccountResponseType } from "@/types/account.types";
 import { format } from "@formkit/tempo";
 import styles from "./select-card-info.module.css";
 
@@ -15,12 +13,13 @@ type SelectCardInfoProps = {
   isInfo: boolean;
 };
 export const SelectCardInfo = ({ isInfo }: SelectCardInfoProps) => {
-  const account = useGetQuery<GetAccountResponseType>(QueryKeys.ACCOUNT);
+  const { data: account } = useGetAccount();
+  const { mutate, isPending } = useCreateAccountDeposits();
+
   const dated = useCardStore((state) => state.form.dated);
   const form = useCardStore((state) => state.form);
   const setStep = useCardStore((state) => state.setStep);
   const setDated = useCardStore((state) => state.setDated);
-  const { mutate, isPending } = useCreateAccountDeposits();
 
   const onConfirm = () => {
     setDated(new Date().toISOString());
@@ -78,13 +77,15 @@ export const SelectCardInfo = ({ isInfo }: SelectCardInfoProps) => {
         <div className={styles.action}>
           <div className={styles.button}>
             <Button
-              label="Continuar"
+              type="button"
               color="primary"
               size="large"
               width="full"
               onClick={onConfirm}
               disabled={isPending}
-            />
+            >
+              Continuar
+            </Button>
           </div>
         </div>
       )}

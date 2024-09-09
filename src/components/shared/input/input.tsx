@@ -4,13 +4,14 @@ import styles from "./input.module.css";
 
 type InputProps = {
   fieldName: string;
-  type: "text" | "password" | "number" | "email";
+  type: "text" | "password" | "number" | "email" | "date";
   placeholder: string;
   size?: "small" | "normal";
   width?: "full";
   display?: boolean;
   icon?: SvgIcon;
   iconColor?: ColorIcon;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const Input = ({
@@ -22,6 +23,7 @@ export const Input = ({
   display = true,
   icon,
   iconColor,
+  onChange,
 }: InputProps) => {
   const {
     register,
@@ -48,6 +50,7 @@ export const Input = ({
         ${!display ? styles.hidden : ""}
       `}
       {...register(fieldName)}
+      {...(onChange && { onChange })}
     />
   ) : (
     <div className={styles.wrapper}>

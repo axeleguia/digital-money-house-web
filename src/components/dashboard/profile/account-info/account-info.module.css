@@ -1,22 +1,15 @@
-.accountInfo {
-  background-color: var(--color-background);
-  border-radius: 10px;
-  padding: 20px 30px;
-  color: var(--color-white);
-}
-
 .accountInfo > p {
   font-size: 16px;
   line-height: 138%;
-  font-weight: 500;
+  font-weight: var(--font-weight-semibold);
   margin-bottom: 30px;
+  color: var(--color-white);
 }
 
 .accountInfo > ul {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  margin-bottom: 10px;
 }
 
 .accountInfo > ul > li {
@@ -34,7 +27,11 @@
   font-size: 20px;
   line-height: 117%;
   color: var(--color-primary);
-  font-weight: 500;
+  font-weight: var(--font-weight-semibold);
+}
+
+.value {
+  color: var(--color-white);
 }
 
 .icon {
@@ -42,8 +39,4 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-
-.copy {
-  color: var(--color-primary);
 }

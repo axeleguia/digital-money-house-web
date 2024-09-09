@@ -11,5 +11,5 @@
   color: #ffffff;
   font-size: 20px;
   text-align: center;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
 }
