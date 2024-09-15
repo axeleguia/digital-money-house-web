@@ -1,6 +1,6 @@
 "use client";
 
-import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
+import { CardSteps } from "@/enums/enum";
 import { Button } from "@/components/shared/button/button";
 import { Icon } from "@/components/shared/icons/icons";
 import { Input } from "@/components/shared/input/input";
@@ -22,8 +22,6 @@ type CardFormProps = {
 export const CardForm = ({ nextStep }: CardFormProps) => {
   const { data: accountData } = useGetAccount();
   const { id: account_id } = accountData || {};
-
-  const setStep = useCardStore((state) => state.setStep);
 
   const [state, setState] = useState({
     number: "",
@@ -49,6 +47,8 @@ export const CardForm = ({ nextStep }: CardFormProps) => {
     formState: { errors },
     watch,
   } = controls;
+
+  const setStep = useCardStore((state) => state.setStep);
 
   useEffect(() => {
     const { unsubscribe } = watch((value, { name }) => {

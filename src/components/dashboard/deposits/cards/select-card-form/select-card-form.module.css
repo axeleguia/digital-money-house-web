@@ -1,11 +1,11 @@
-.selectCardForm {
+#selectCardForm {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.selectCardForm > p {
+#selectCardForm > p {
   color: var(--color-primary);
   font-style: normal;
   font-weight: var(--font-weight-bold);
@@ -34,6 +34,7 @@
   flex-direction: row;
   justify-content: end;
 }
+
 .buttonMobile > button {
   flex: 0.5;
   align-self: self-end;

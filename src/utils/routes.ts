@@ -1,4 +1,4 @@
-type RouteType = {
+export type RouteType = {
   name: string;
   path: string;
   children?: RouteType[];
@@ -33,7 +33,13 @@ export const routes: RouteType[] = [
   },
   {
     name: "Pagar Servicios",
-    path: "/dashboard/payments",
+    path: "/dashboard/services",
+    children: [
+      {
+        name: "Transferencia bancaria",
+        path: "/dashboard/services/.*$",
+      },
+    ],
   },
   {
     name: "Tarjetas",

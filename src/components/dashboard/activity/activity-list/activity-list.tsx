@@ -23,24 +23,29 @@ export const ActivityList = ({
   showViewAll,
 }: ActivityListProps) => {
   const { data: accountData } = useGetAccount();
-  const { data } = useGetAccountActivity(accountData?.id!);
+  const { data, isLoading } = useGetAccountActivity(accountData?.id!);
   const reversedData = data?.toReversed();
 
-  const filter = useActivityStore((state) => state.form.filter);
-  const date = useActivityStore((state) => state.form.date);
+  const { searchTerm, filter, date } = useActivityStore((state) => state.form);
 
   const { filterActivityList } = useActivityFiltered(
     reversedData!,
-    filter!,
+    searchTerm,
+    filter,
     date
   );
+
   const { currentItems, currentPage, totalPages, paginate } = usePagination(
     filterActivityList!,
     ITEMS_PER_PAGE
   );
 
   return (
-    <List title="Tu actividad">
+    <List
+      title="Tu actividad"
+      isLoading={isLoading}
+      isEmpty={!currentItems?.length}
+    >
       <ul>
         {currentItems?.map((item) => (
           <ActivityItem key={item.id} data={item} />

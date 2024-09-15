@@ -32,7 +32,7 @@
 }
 
 .invalid {
-  border: 2px solid var(--color-error-light);
+  border: 2px solid var(--color-error);
 }
 
 .full {

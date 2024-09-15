@@ -20,6 +20,7 @@ export const Card = ({
         padding: "30px",
         marginBottom: "20px",
         borderRadius: "var(--border-radius)",
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
       }}
       {...(onMouseLeave && { onMouseLeave })}
     >

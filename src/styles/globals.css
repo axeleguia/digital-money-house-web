@@ -11,6 +11,7 @@
   --color-white: #ffffff;
   --color-gray: #828282;
   --color-silver: #cecece;
+  --color-error: #e91010;
 
   /*
   --color-background: #052a2d;
@@ -25,9 +26,6 @@
   --color-secondary: #3a3a3a;
   --color-tertiary: #e3dfcf;
   */
-
-  --color-error-light: #ee3838;
-  --color-error-dark: #e91010;
 
   --font-heading-1: 24px;
   --font-heading-2: 20px;

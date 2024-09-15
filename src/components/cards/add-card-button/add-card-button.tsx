@@ -1,6 +1,6 @@
 "use client";
 
-import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
+import { CardSteps } from "@/enums/enum";
 import { Button } from "@/components/shared/button/button";
 import { Icon } from "@/components/shared/icons/icons";
 import { useCardStore } from "@/providers/card-store.provider";
@@ -41,8 +41,7 @@ const AddCardButtonSimple = ({ size }: AddCardButtonProps) => {
 };
 
 const AddCardButtonForm = ({ size }: AddCardButtonProps) => {
-  const card = useCardStore((state) => state.form.card);
-  const setStep = useCardStore((state) => state.setStep);
+  const { card, setStep } = useCardStore((state) => state);
   const onAddCard = () => {
     if (size === MAX_CARDS) {
       toast.message("No puedes agregar más de 10 tarjetas");

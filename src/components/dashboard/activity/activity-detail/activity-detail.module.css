@@ -27,14 +27,3 @@
 .date {
   color: var(--color-white);
 }
-
-.description {
-  font-size: 16px;
-  color: var(--color-white);
-}
-
-.value {
-  font-size: 20px;
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-}

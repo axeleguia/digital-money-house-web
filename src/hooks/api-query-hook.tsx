@@ -39,29 +39,29 @@ export const useRegister = () => {
 };
 
 export const useGetAccount = () => {
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["account"],
     queryFn: async () => apiService.getAccount(),
   });
-  return { data, isFetching, isLoading };
+  return { data, isLoading };
 };
 
 export const useGetAccountUser = (user_id: number) => {
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: async () => apiService.getUser({ user_id }),
     enabled: !!user_id,
   });
-  return { data, isFetching };
+  return { data, isLoading };
 };
 
 export const useGetAccountCards = (account_id: number) => {
-  const { data, isFetching } = useQuery<GetAccountCardsResponseType[]>({
+  const { data, isLoading } = useQuery<GetAccountCardsResponseType[]>({
     queryKey: ["cards"],
     queryFn: async () => apiService.getAccountCards({ account_id }),
     enabled: !!account_id,
   });
-  return { data, isFetching };
+  return { data, isLoading };
 };
 
 export const useUpdateAccountUser = (user_id: number) => {
@@ -153,28 +153,57 @@ export const useCreateAccountDeposits = () => {
   });
 };
 
+export const useCreateAccountTransferences = () => {
+  return useMutation({
+    mutationFn: async (variables: {
+      account_id: number;
+      transferRequest: PostAccountTransferencesRequestType;
+    }) => {
+      return await apiService.postAccountTransferences(
+        variables.account_id,
+        variables.transferRequest
+      );
+    },
+    onSuccess: () => {
+      toast.message("Transferencia registrada");
+    },
+    onError: (e) => {
+      toast.message("Ocurrio un problema al registrar la transferencia");
+    },
+  });
+};
+
 export const useGetAccountActivity = (account_id: number) => {
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["activity"],
     queryFn: async () => apiService.getAccountActivity(account_id),
     enabled: !!account_id,
   });
-  return { data, isFetching };
+  return { data, isLoading };
 };
 
 export const useGetAccountActivityById = (account_id: number, id: number) => {
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["activity-detail"],
     queryFn: async () => apiService.getAccountTransactionById(account_id, id),
     enabled: !!account_id && !!id,
   });
-  return { data, isFetching };
+  return { data, isLoading };
 };
 
 export const useGetServices = () => {
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["payment-services"],
     queryFn: async () => apiService.getServices(),
   });
-  return { data, isFetching };
+  return { data, isLoading };
+};
+
+export const useGetServiceDetail = (service_id: number) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["service-detail"],
+    queryFn: async () => apiService.getServiceDetail(service_id),
+    enabled: !!service_id,
+  });
+  return { data, isLoading };
 };

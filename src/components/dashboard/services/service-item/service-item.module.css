@@ -23,4 +23,8 @@
 .select {
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
+
+  &:hover {
+    color: var(--color-gray);
+  }
 }

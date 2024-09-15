@@ -4,6 +4,7 @@ import apiService from "@/services/api.service";
 import { routes } from "@/utils/routes";
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./menu.module.css";
+import { validatePathname } from "@/utils/util";
 
 export const Menu = () => {
   const pathname = usePathname();
@@ -24,12 +25,7 @@ export const Menu = () => {
       {routes.map((route) => (
         <li
           key={route.path}
-          className={
-            route.path === pathname ||
-            route.children?.some((item) => item.path === pathname)
-              ? styles.active
-              : ""
-          }
+          className={validatePathname(route, pathname) ? styles.active : ""}
           onClick={() => navigateTo(route.path)}
         >
           {route.name}

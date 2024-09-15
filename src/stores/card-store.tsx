@@ -1,13 +1,13 @@
-import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
+import { CardSteps } from "@/enums/enum";
 import { createStore } from "zustand/vanilla";
 
 export type CardState = {
   form: {
-    step: CardSteps | undefined;
-    card: GetAccountCardsResponseType | undefined;
     amount: number | undefined;
     dated: string | undefined;
   };
+  step: CardSteps | undefined;
+  card: GetAccountCardsResponseType | undefined;
 };
 
 export type CardActions = {
@@ -21,20 +21,18 @@ export type CardStore = CardState & CardActions;
 
 export const defaultInitialState: CardState = {
   form: {
-    step: CardSteps.DEFAULT,
-    card: undefined,
     amount: undefined,
     dated: undefined,
   },
+  step: CardSteps.DEFAULT,
+  card: undefined,
 };
 
 export const createCardStore = (initState: CardState = defaultInitialState) => {
   return createStore<CardStore>()((set) => ({
     ...initState,
-    setStep: (step: CardSteps) =>
-      set((state) => ({ form: { ...state.form, step } })),
-    setCard: (card: GetAccountCardsResponseType) =>
-      set((state) => ({ form: { ...state.form, card } })),
+    setStep: (step: CardSteps) => set({ step }),
+    setCard: (card: GetAccountCardsResponseType) => set({ card }),
     setAmount: (amount: number) =>
       set((state) => ({ form: { ...state.form, amount } })),
     setDated: (dated: string) =>

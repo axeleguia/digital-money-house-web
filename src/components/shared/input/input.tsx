@@ -1,6 +1,7 @@
 import { ColorIcon, Icon, SvgIcon } from "@/components/shared/icons/icons";
 import { useFormContext } from "react-hook-form";
 import styles from "./input.module.css";
+import { on } from "events";
 
 type InputProps = {
   fieldName: string;
@@ -12,6 +13,7 @@ type InputProps = {
   icon?: SvgIcon;
   iconColor?: ColorIcon;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocusOut?: () => void;
 };
 
 export const Input = ({
@@ -24,6 +26,7 @@ export const Input = ({
   icon,
   iconColor,
   onChange,
+  onFocusOut,
 }: InputProps) => {
   const {
     register,
@@ -51,6 +54,7 @@ export const Input = ({
       `}
       {...register(fieldName)}
       {...(onChange && { onChange })}
+      {...(onFocusOut && { onFocusOut })}
     />
   ) : (
     <div className={styles.wrapper}>

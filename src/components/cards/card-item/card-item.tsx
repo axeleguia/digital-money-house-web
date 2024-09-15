@@ -1,5 +1,6 @@
 import { useDeleteAccountCards } from "@/hooks/api-query-hook";
 import styles from "./card-item.module.css";
+import { getLastDigits } from "@/utils/util";
 
 type CardItemProps = {
   id: number;
@@ -26,8 +27,4 @@ export const CardItem = (cardItemProps: CardItemProps) => {
       </div>
     </li>
   );
-};
-
-const getLastDigits = (cardNumber: number) => {
-  return String(cardNumber).slice(-4);
 };

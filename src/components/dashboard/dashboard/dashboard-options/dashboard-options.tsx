@@ -18,7 +18,7 @@ export const DashboardOptions = () => {
         color="primary"
         size="extralarge"
         width="full"
-        href={"/dashboard/payments"}
+        href={"/dashboard/services"}
       >
         Pagar servicios
       </Button>

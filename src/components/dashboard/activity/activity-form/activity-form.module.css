@@ -1,11 +1,11 @@
-.search {
+#activityForm {
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
   gap: 20px;
 }
 
-.search > svg {
+#activityForm > svg {
   position: absolute;
   top: 50%;
 }

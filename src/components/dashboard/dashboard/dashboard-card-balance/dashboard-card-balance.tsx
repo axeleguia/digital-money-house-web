@@ -20,7 +20,7 @@ export const DashboardCardBalance = () => {
         <Link href={"/dashboard/activity"}>Ver CVU</Link>
       </div>
       <p>Dinero disponible</p>
-      <span>{`$ ${available_amount}`}</span>
+      <span>{`$ ${available_amount?.toFixed(2) || "-"}`}</span>
     </Card>
   );
 };

@@ -1,28 +1,28 @@
-.selectCardOptions {
+.transactionOptions {
   display: flex;
   flex-direction: row;
   justify-content: end;
 }
 
-.selectCardOptions > div {
+.transactionOptions > div {
   display: flex;
   flex-direction: row;
   width: 600px;
   gap: 20px;
 }
 
-.selectCardOptions > div > a {
+.transactionOptions > div > a {
   width: 100%;
 }
 
 @media (width <= 1440px) {
-  .selectCardOptions > div {
+  .transactionOptions > div {
     width: 100%;
   }
 }
 
 @media (width < 834px) {
-  .selectCardOptions > div {
+  .transactionOptions > div {
     width: 100%;
     flex-direction: column-reverse;
   }

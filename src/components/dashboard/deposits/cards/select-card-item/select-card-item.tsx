@@ -1,6 +1,7 @@
 import { useCardStore } from "@/providers/card-store.provider";
 import styles from "./select-card-item.module.css";
 import { InputRadio } from "@/components/shared/input-radio/input-radio";
+import { getLastDigits } from "@/utils/util";
 
 type SelectCardItemProps = {
   data: GetAccountCardsResponseType;
@@ -24,8 +25,4 @@ export const SelectCardItem = ({ data }: SelectCardItemProps) => {
       </div>
     </li>
   );
-};
-
-const getLastDigits = (cardNumber: number) => {
-  return String(cardNumber).slice(-4);
 };

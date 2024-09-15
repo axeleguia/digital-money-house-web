@@ -1,18 +1,16 @@
-import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
 import { Button } from "@/components/shared/button/button";
+import { Card } from "@/components/shared/card/card";
 import { Input } from "@/components/shared/input/input";
+import { CardSteps } from "@/enums/enum";
 import useMediaQuery from "@/hooks/media-query";
 import { useCardStore } from "@/providers/card-store.provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import styles from "./select-card-form.module.css";
-import { Card } from "@/components/shared/card/card";
 
 export const SelectCardForm = () => {
   const isMobile = useMediaQuery("(max-width: 834px)");
-  const setStep = useCardStore((state) => state.setStep);
-  const setAmount = useCardStore((state) => state.setAmount);
   const schema = z.object({
     amount: z.string().pipe(z.coerce.number().positive()),
   });
@@ -26,6 +24,8 @@ export const SelectCardForm = () => {
     formState: { isValid },
   } = controls;
 
+  const { setStep, setAmount } = useCardStore((state) => state);
+
   const onSubmit = (data: FormData) => {
     setAmount(data.amount);
     setStep(CardSteps.SELECT_CARD_INFO);
@@ -34,10 +34,7 @@ export const SelectCardForm = () => {
   return (
     <FormProvider {...controls}>
       <Card color="background">
-        <form
-          className={styles.selectCardForm}
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form id={styles.selectCardForm} onSubmit={handleSubmit(onSubmit)}>
           <p>¿Cuanto querés ingresar a la cuenta?</p>
           <div className={styles.input}>
             <Input
@@ -65,21 +62,21 @@ export const SelectCardForm = () => {
             </div>
           )}
         </form>
-        {isMobile && (
-          <div className={styles.buttonMobile}>
-            <Button
-              type="submit"
-              color="primary"
-              size="large"
-              width="full"
-              onSubmit={onSubmit}
-              disabled={!isValid}
-            >
-              Continuar
-            </Button>
-          </div>
-        )}
       </Card>
+      {isMobile && (
+        <div className={styles.buttonMobile}>
+          <Button
+            type="submit"
+            color="primary"
+            size="large"
+            width="full"
+            onSubmit={onSubmit}
+            disabled={!isValid}
+          >
+            Continuar
+          </Button>
+        </div>
+      )}
     </FormProvider>
   );
 };

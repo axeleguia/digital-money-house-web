@@ -11,8 +11,7 @@ export const ActivityFilter = () => {
   const [showPanel, setShowPanel] = useState<boolean>(false);
   const [selectedFilter, setSelectedFilter] = useState<string>("");
   const filter = useActivityStore((state) => state.form.filter);
-  const setFilter = useActivityStore((state) => state.setFilter);
-  const setDate = useActivityStore((state) => state.setDate);
+  const { setFilter, setDate } = useActivityStore((state) => state);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedFilter(event.target.value);
@@ -32,6 +31,7 @@ export const ActivityFilter = () => {
 
   const onSelectDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDate(e.target.value);
+    if (selectedFilter === "other") applyFilter();
   };
 
   return (
@@ -55,22 +55,24 @@ export const ActivityFilter = () => {
             </div>
           </div>
           <ul className={styles.content}>
-            {Object.keys(filterOptions).map((key) => (
-              <li key={key}>
-                <label
-                  className={`${styles.label} ${filter === key && styles.selected}`}
-                >
-                  {filterOptions[key].label}
-                  <InputRadio
-                    name="filter"
-                    value={key}
-                    onChange={onChange}
-                    checked={selectedFilter === key}
-                  />
-                </label>
-              </li>
-            ))}
-            <li>
+            {Object.keys(filterOptions)
+              .filter((key) => filterOptions[key].isVisible)
+              .map((key, index) => (
+                <li key={index}>
+                  <label
+                    className={`${styles.label} ${filter === key && styles.selected}`}
+                  >
+                    {filterOptions[key].label}
+                    <InputRadio
+                      name="filter"
+                      value={key}
+                      onChange={onChange}
+                      checked={selectedFilter === key}
+                    />
+                  </label>
+                </li>
+              ))}
+            <li key={"other2"}>
               <label
                 className={`${styles.label} ${filter === "other" && styles.selected}`}
                 onClick={() => setSelectedFilter("other")}
@@ -80,7 +82,7 @@ export const ActivityFilter = () => {
               </label>
             </li>
             {selectedFilter === "other" && (
-              <li>
+              <li key={"other-date-picker"}>
                 <Input
                   type="date"
                   fieldName="range"

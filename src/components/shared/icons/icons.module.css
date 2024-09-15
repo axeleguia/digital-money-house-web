@@ -29,3 +29,7 @@
 .colorBlack {
   color: var(--color-black);
 }
+
+.colorError {
+  color: var(--color-error);
+}

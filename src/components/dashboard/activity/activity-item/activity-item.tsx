@@ -12,9 +12,9 @@ export const ActivityItem = ({ data }: ActivityItemProps) => {
   const router = useRouter();
 
   const fixedDescription = () => {
-    const fixedType = type === "Deposit" ? "Deposito" : "Retiro";
+    const fixedType = type === "Deposit" ? "Deposito" : "Transferencia";
     const fixedDestination =
-      origin === destination ? "a cuenta propia" : `${origin} a ${destination}`;
+      origin === destination ? "a cuenta propia" : `a cuenta ${destination}`;
     return `${fixedType} ${fixedDestination}`;
   };
 
@@ -26,7 +26,9 @@ export const ActivityItem = ({ data }: ActivityItemProps) => {
       <div className={styles.icon}></div>
       <div className={styles.description}>{fixedDescription()}</div>
       <div className={styles.group}>
-        <p className={styles.amount}>${amount.toFixed(2)}</p>
+        <p className={styles.amount}>
+          {(amount < 0 ? "-$ " : "$ ") + (Math.abs(amount).toFixed(2) || "-")}
+        </p>
         <p className={styles.date}>
           {date.charAt(0).toUpperCase() + date.slice(1)}
         </p>

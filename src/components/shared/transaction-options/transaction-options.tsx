@@ -1,16 +1,16 @@
 import { Button } from "@/components/shared/button/button";
 import { toast } from "sonner";
-import styles from "./select-card-options.module.css";
+import styles from "./transaction-options.module.css";
 
 const onDownload = () => {
   toast.message("Descargando comprobante ...", {
-    description: "Es mentira aún no se implementa esta funcionalidad :)",
+    description: "Esta funcionalidad no se encuentra disponible temporalmente",
   });
 };
 
-export const SelectCardOptions = () => {
+export const TransactionOptions = () => {
   return (
-    <div className={styles.selectCardOptions}>
+    <div className={styles.transactionOptions}>
       <div>
         <Button
           type="link"

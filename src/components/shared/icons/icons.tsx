@@ -1,3 +1,4 @@
+import { error } from "console";
 import styles from "./icons.module.css";
 
 export type SvgIcon =
@@ -10,6 +11,7 @@ export type SvgIcon =
   | "copy"
   | "pencil"
   | "success"
+  | "fail"
   | "search"
   | "add"
   | "profile"
@@ -27,7 +29,8 @@ export type ColorIcon =
   | "opaque"
   | "gray"
   | "silver"
-  | "black";
+  | "black"
+  | "error";
 
 const cssColor = {
   background: styles.colorBackground,
@@ -38,6 +41,7 @@ const cssColor = {
   gray: styles.colorGray,
   silver: styles.colorSilver,
   black: styles.colorBlack,
+  error: styles.colorError,
 };
 
 const LogoIcon = ({ color = "black", onClick }: IconProps) => (
@@ -247,6 +251,40 @@ const SuccessIcon = ({
         <rect width="92" height="95" fill="currentColor" />
       </clipPath>
     </defs>
+  </svg>
+);
+
+const FailIcon = ({ color = "black", onClick }: IconProps) => (
+  <svg
+    width="92"
+    height="95"
+    viewBox="0 0 92 95"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...(onClick && { onClick })}
+    className={cssColor[color]}
+  >
+    <path
+      d="M23 23L42 42"
+      stroke="currentColor"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M23 42L42 23"
+      stroke="currentColor"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <circle
+      cx="32.5"
+      cy="32.5"
+      r="30.5"
+      stroke="currentColor"
+      stroke-width="4"
+    />
   </svg>
 );
 
@@ -472,6 +510,7 @@ export const Icon = (props: IconProps): JSX.Element => {
     copy: <CopyIcon {...props} />,
     pencil: <PencilIcon {...props} />,
     success: <SuccessIcon {...props} />,
+    fail: <FailIcon {...props} />,
     search: <SearchIcon {...props} />,
     add: <AddIcon {...props} />,
     profile: <ProfileIcon {...props} />,

@@ -1,6 +1,9 @@
-import { CardSteps } from "@/components/dashboard/deposits/cards/enum";
+import {
+  TransactionInfo,
+  TransactionInfoProps,
+} from "@/components/shared/transaction-info/transaction-info";
 import { Button } from "@/components/shared/button/button";
-import { Icon } from "@/components/shared/icons/icons";
+import { CardSteps } from "@/enums/enum";
 import {
   useCreateAccountDeposits,
   useGetAccount,
@@ -16,18 +19,20 @@ export const SelectCardInfo = ({ isInfo }: SelectCardInfoProps) => {
   const { data: account } = useGetAccount();
   const { mutate, isPending } = useCreateAccountDeposits();
 
-  const dated = useCardStore((state) => state.form.dated);
-  const form = useCardStore((state) => state.form);
-  const setStep = useCardStore((state) => state.setStep);
-  const setDated = useCardStore((state) => state.setDated);
+  const {
+    form: { amount, dated },
+    card,
+    setStep,
+    setDated,
+  } = useCardStore((state) => state);
 
   const onConfirm = () => {
     setDated(new Date().toISOString());
     mutate(
       {
-        account_id: form.card?.account_id!,
+        account_id: card?.account_id!,
         depositRequest: {
-          amount: form.amount,
+          amount: amount!,
           dated: dated!,
           destination: account?.cvu!,
           origin: account?.cvu!,
@@ -39,40 +44,22 @@ export const SelectCardInfo = ({ isInfo }: SelectCardInfoProps) => {
     );
   };
 
+  const transaction: TransactionInfoProps = {
+    amountLabel: !isInfo
+      ? "Vas a transferir"
+      : format(dated!, { date: "full", time: "short" }),
+    amount: `$ ${Math.abs(amount!).toFixed(2) || "-"}`,
+    fromLabel: "Para",
+    from: "Cuenta propia",
+    toLabel: "Banco",
+    to: "CVU " + account?.cvu,
+    highlight: true,
+  };
+
   return (
     <div className={styles.selectCardInfo}>
       <h3>Revisa que está todo bien</h3>
-      <div>
-        <div className={styles.transferTo}>
-          <p className={styles.description}>
-            {!isInfo
-              ? "Vas a transferir"
-              : format(dated!, { date: "full", time: "short" })}
-          </p>
-          {!isInfo && (
-            <Icon
-              icon="edit"
-              color="primary"
-              onClick={() => setStep(CardSteps.SELECT_CARD_FORM)}
-            />
-          )}
-        </div>
-        <p className={`${styles.value} ${isInfo ? styles.highlight : ""}`}>
-          ${form.amount}
-        </p>
-      </div>
-      <div>
-        <p className={styles.description}>Para</p>
-        <p className={`${styles.value} ${isInfo ? styles.highlight : ""}`}>
-          Cuenta propia
-        </p>
-      </div>
-      <div>
-        <p className={styles.description}>Bank</p>
-        <p className={`${styles.value} ${isInfo ? styles.highlight : ""}`}>
-          CVU {account?.cvu}
-        </p>
-      </div>
+      <TransactionInfo {...transaction} />
       {!isInfo && (
         <div className={styles.action}>
           <div className={styles.button}>

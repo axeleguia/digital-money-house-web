@@ -15,35 +15,7 @@
   padding-bottom: 20px;
   border-bottom: 1px solid var(--color-white);
 }
-.transferTo {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
 
-.transferTo > svg {
-  cursor: pointer;
-}
-
-.description {
-  font-size: 16px;
-  color: var(--color-white);
-}
-
-.value {
-  font-size: 20px;
-  font-weight: var(--font-weight-bold);
-  color: var(--color-white);
-}
-
-.highlight {
-  color: var(--color-primary);
-}
-
-.action {
-  display: flex;
-  justify-content: end;
-}
 .button {
   width: 256px;
 }

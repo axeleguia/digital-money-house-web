@@ -1,5 +1,9 @@
 import httpExternalService from "@/services/common/http-external.service";
 import httpInternalService from "@/services/common/http-internal.service";
+import {
+  PostAccountDepositsRequestType,
+  PostAccountDepositsResponseType,
+} from "@/types/account-deposits.types";
 import { GetAccountResponseType } from "@/types/account.types";
 import {
   LoginInternalResponseType,
@@ -19,10 +23,6 @@ import {
   PatchUserResponseType,
 } from "@/types/user.types";
 import httpProxyService from "./common/http-proxy.service";
-import {
-  PostAccountDepositsRequestType,
-  PostAccountDepositsResponseType,
-} from "@/types/account-deposits.types";
 
 class ApiService {
   // Internal Routes
@@ -99,6 +99,15 @@ class ApiService {
       PostAccountDepositsResponseType
     >(`/api/accounts/${account_id}/deposits`, depositRequest);
 
+  postAccountTransferences = async (
+    account_id: number,
+    transferRequest: PostAccountDepositsRequestType
+  ) =>
+    httpProxyService.httpPost<
+      PostAccountDepositsRequestType,
+      PostAccountDepositsResponseType
+    >(`/api/accounts/${account_id}/transferences`, transferRequest);
+
   getAccountActivity = async (account_id: number) =>
     httpProxyService.httpGet<GetAccountActivityResponseType[]>(
       `/api/accounts/${account_id}/activity`
@@ -111,6 +120,11 @@ class ApiService {
 
   getServices = async () =>
     httpProxyService.httpGet<GetServiceResponseType[]>(`/service`);
+
+  getServiceDetail = async (service_id: number) =>
+    httpProxyService.httpGet<GetServiceDetailResponseType>(
+      `/service/${service_id}`
+    );
 }
 
 const apiService = new ApiService();

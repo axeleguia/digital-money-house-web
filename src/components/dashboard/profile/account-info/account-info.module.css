@@ -40,3 +40,7 @@
   align-items: center;
   cursor: pointer;
 }
+
+.icon > svg:hover {
+  color: var(--color-gray);
+}
