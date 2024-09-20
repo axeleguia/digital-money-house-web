@@ -17,7 +17,7 @@ export const ServiceItem = ({ data }: ServiceItemProps) => {
 
   return (
     <li className={styles.serviceItem} onClick={onClick}>
-      <div className={styles.icon}></div>
+      <img src={`/services/${name}.svg`} alt="icon" width={58} height={87} />
       <div className={styles.description}>{name}</div>
       <div className={styles.select}>Seleccionar</div>
     </li>
