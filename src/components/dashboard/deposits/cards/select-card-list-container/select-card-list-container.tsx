@@ -1,4 +1,4 @@
-import { AddCardButton } from "@/components/cards/add-card-button/add-card-button";
+import { AddCardButton } from "@/components/dashboard/cards/add-card-button/add-card-button";
 import { SelectCardList } from "@/components/dashboard/deposits/cards/select-card-list/select-card-list";
 import { Card } from "@/components/shared/card/card";
 import { useGetAccount, useGetAccountCards } from "@/hooks/api-query-hook";

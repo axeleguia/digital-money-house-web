@@ -1,6 +1,6 @@
 "use client";
 
-import { CardForm } from "@/components/cards/card-form/card-form";
+import { CardForm } from "@/components/dashboard/cards/card-form/card-form";
 import { SelectCardForm } from "@/components/dashboard/deposits/cards/select-card-form/select-card-form";
 import { SelectCardInfo } from "@/components/dashboard/deposits/cards/select-card-info/select-card-info";
 import { SelectCardListContainer } from "@/components/dashboard/deposits/cards/select-card-list-container/select-card-list-container";

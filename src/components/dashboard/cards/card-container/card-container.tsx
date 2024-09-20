@@ -1,8 +1,8 @@
 "use client";
 
-import { AddCard } from "@/components/cards/add-card-container/add-card-container";
-import { CardForm } from "@/components/cards/card-form/card-form";
-import { CardList } from "@/components/cards/card-list/card-list";
+import { AddCard } from "@/components/dashboard/cards/add-card-container/add-card-container";
+import { CardForm } from "@/components/dashboard/cards/card-form/card-form";
+import { CardList } from "@/components/dashboard/cards/card-list/card-list";
 import { CardSteps } from "@/enums/enum";
 import { useGetAccount, useGetAccountCards } from "@/hooks/api-query-hook";
 import { useCardStore } from "@/providers/card-store.provider";
