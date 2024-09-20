@@ -11,12 +11,13 @@ import { useCardStore } from "@/providers/card-store.provider";
 import { useServiceStore } from "@/providers/service-store-provider";
 import { useParams } from "next/navigation";
 import styles from "./service-payment-select-card-list.module.css";
+import { Icon } from "@/components/shared/icons/icons";
 
 export const ServicePaymentSelectCardList = () => {
   const { data: account } = useGetAccount();
   const { data, isLoading } = useGetAccountCards(account?.id!);
 
-  const { mutate } = useCreateAccountTransferences();
+  const { mutate, isPending } = useCreateAccountTransferences();
 
   const { id: service_id } = useParams();
 
@@ -58,8 +59,10 @@ export const ServicePaymentSelectCardList = () => {
             size="large"
             width="full"
             onClick={onPayment}
+            disabled={isPending}
           >
             Pagar
+            {isPending && <Icon icon="spinner" color="tertiary" />}
           </Button>
         </div>
       </div>

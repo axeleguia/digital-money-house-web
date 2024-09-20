@@ -2,9 +2,9 @@
 
 import apiService from "@/services/api.service";
 import { routes } from "@/utils/routes";
+import { validatePathname } from "@/utils/util";
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./menu.module.css";
-import { validatePathname } from "@/utils/util";
 
 export const Menu = () => {
   const pathname = usePathname();

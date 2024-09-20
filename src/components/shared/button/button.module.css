@@ -40,23 +40,23 @@
 }
 
 .small {
-  font-size: 16px;
+  font-size: var(--font-heading-3);
   padding: 10px;
 }
 
 .medium {
-  font-size: 16px;
+  font-size: var(--font-heading-3);
   padding: 15px;
 }
 
 .large {
-  font-size: 16px;
+  font-size: var(--font-heading-3);
   line-height: 29px;
   padding: 20px;
 }
 
 .extralarge {
-  font-size: 24px;
+  font-size: var(--font-heading-1);
   padding: 40px;
 }
 
@@ -97,7 +97,7 @@
 
 @media (width < 834px) {
   .extralarge {
-    font-size: 16px;
+    font-size: var(--font-heading-3);
     padding: 25px;
   }
 }

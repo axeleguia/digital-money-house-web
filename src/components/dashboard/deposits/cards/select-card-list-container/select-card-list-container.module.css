@@ -6,7 +6,7 @@
 }
 
 .selectCardListContainer > h4 {
-  font-size: 24px;
+  font-size: var(--font-heading-1);
   color: var(--color-primary);
   font-weight: var(--font-weight-bold);
   margin-bottom: 20px;

@@ -18,7 +18,7 @@
 
 .description {
   flex: auto;
-  font-size: 16px;
+  font-size: var(--font-heading-3);
 }
 
 .group {
@@ -35,5 +35,5 @@
 }
 
 .amount {
-  font-size: 16px;
+  font-size: var(--font-heading-3);
 }

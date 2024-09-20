@@ -6,13 +6,13 @@
 }
 
 .servicePaymentFail > h3 {
-  font-size: 24px;
+  font-size: var(--font-heading-1);
   color: var(--color-white);
   font-weight: var(--font-weight-bold);
 }
 
 .servicePaymentFail > div {
-  font-size: 16px;
+  font-size: var(--font-heading-3);
   color: var(--color-gray);
   text-align: center;
 }

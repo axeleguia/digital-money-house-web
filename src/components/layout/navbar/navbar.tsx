@@ -3,7 +3,6 @@
 import { ProfileHeader } from "@/components/layout/profile-header/profile-header";
 import { Button } from "@/components/shared/button/button";
 import { Icon } from "@/components/shared/icons/icons";
-import { useGetAccount, useGetAccountUser } from "@/hooks/api-query-hook";
 import Link from "next/link";
 import styles from "./navbar.module.css";
 
@@ -13,10 +12,6 @@ type NavbarProps = {
 };
 
 export const Navbar = ({ color = "primary", pathname }: NavbarProps) => {
-  const { data: accountData } = useGetAccount();
-  const { data: userData } = useGetAccountUser(accountData?.user_id!);
-  const { firstname, lastname } = userData || {};
-
   const cssColor = {
     primary: styles.bgPrimary,
     background: styles.bgBackground,
@@ -46,9 +41,7 @@ export const Navbar = ({ color = "primary", pathname }: NavbarProps) => {
             Iniciar sesión
           </Button>
         )}
-        {userData && pathname.includes("/dashboard") && (
-          <ProfileHeader firstname={firstname!} lastname={lastname!} />
-        )}
+        {pathname.includes("/dashboard") && <ProfileHeader />}
       </div>
     </nav>
   );

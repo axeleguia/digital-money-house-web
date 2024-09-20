@@ -15,12 +15,12 @@
 }
 
 .label {
-  font-size: 16px;
+  font-size: var(--font-heading-3);
   color: var(--color-white);
 }
 
 .value {
-  font-size: 20px;
+  font-size: var(--font-heading-2);
   font-weight: var(--font-weight-bold);
   color: var(--color-white);
 }

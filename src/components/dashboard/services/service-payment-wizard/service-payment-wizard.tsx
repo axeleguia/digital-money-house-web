@@ -1,11 +1,11 @@
 "use client";
 
+import { ServicePaymentFail } from "@/components/dashboard/services/service-payment-fail/service-payment-fail";
 import { ServicePaymentForm } from "@/components/dashboard/services/service-payment-form/service-payment-form";
 import { ServicePaymentSelectCardList } from "@/components/dashboard/services/service-payment-select-card-list/service-payment-select-card-list";
 import { ServicePaymentVoucher } from "@/components/dashboard/services/service-payment-voucher/service-payment-voucher";
 import { ActivityPaymentSteps } from "@/enums/enum";
 import { useServiceStore } from "@/providers/service-store-provider";
-import { ServicePaymentFail } from "../service-payment-fail/service-payment-fail";
 
 export const ServicePaymentWizard = () => {
   const step = useServiceStore((state) => state.step);

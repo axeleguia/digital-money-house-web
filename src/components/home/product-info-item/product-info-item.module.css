@@ -16,7 +16,7 @@
 
 .description {
   padding-top: 10px;
-  font-size: 20px;
+  font-size: var(--font-heading-2);
 }
 
 @media (width <= 1440px) {
@@ -30,6 +30,6 @@
   }
 
   .description {
-    font-size: 16px;
+    font-size: var(--font-heading-3);
   }
 }

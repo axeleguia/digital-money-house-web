@@ -11,6 +11,7 @@ import {
 import { useCardStore } from "@/providers/card-store.provider";
 import { format } from "@formkit/tempo";
 import styles from "./select-card-info.module.css";
+import { Icon } from "@/components/shared/icons/icons";
 
 type SelectCardInfoProps = {
   isInfo: boolean;
@@ -72,6 +73,7 @@ export const SelectCardInfo = ({ isInfo }: SelectCardInfoProps) => {
               disabled={isPending}
             >
               Continuar
+              {isPending && <Icon icon="spinner" color="tertiary" />}
             </Button>
           </div>
         </div>

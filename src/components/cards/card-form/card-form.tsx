@@ -1,9 +1,9 @@
 "use client";
 
-import { CardSteps } from "@/enums/enum";
 import { Button } from "@/components/shared/button/button";
 import { Icon } from "@/components/shared/icons/icons";
 import { Input } from "@/components/shared/input/input";
+import { CardSteps } from "@/enums/enum";
 import { useCreateAccountCards, useGetAccount } from "@/hooks/api-query-hook";
 import { useCardStore } from "@/providers/card-store.provider";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -71,7 +71,7 @@ export const CardForm = ({ nextStep }: CardFormProps) => {
     cod: Number(state.cvc),
   };
 
-  const { mutate } = useCreateAccountCards(account_id!, cardRequest);
+  const { mutate, isPending } = useCreateAccountCards(account_id!, cardRequest);
 
   const onSubmit = (data: FormData) => {
     mutate(
@@ -131,8 +131,10 @@ export const CardForm = ({ nextStep }: CardFormProps) => {
               size="large"
               width="full"
               onSubmit={onSubmit}
+              disabled={isPending}
             >
               Continuar
+              {isPending && <Icon icon="spinner" color="tertiary" />}
             </Button>
           </div>
         </div>

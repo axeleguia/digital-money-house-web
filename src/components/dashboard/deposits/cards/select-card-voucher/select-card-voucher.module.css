@@ -7,7 +7,7 @@
 }
 
 .message > h3 {
-  font-size: 24px;
+  font-size: var(--font-heading-1);
   color: var(--color-black);
   font-weight: var(--font-weight-bold);
 }

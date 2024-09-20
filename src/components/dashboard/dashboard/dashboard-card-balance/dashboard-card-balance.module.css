@@ -8,8 +8,8 @@
 
 .options > a {
   text-decoration: underline;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: var(--font-heading-3);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-white);
 }
 
@@ -18,8 +18,8 @@
 }
 
 .dashboardCardBalance > p {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--font-heading-3);
+  font-weight: var(--font-weight-bold);
   margin-bottom: 15px;
   color: var(--color-white);
 }
@@ -30,7 +30,7 @@
   border-radius: 100px;
   padding: 10px 20px;
   font-size: 36px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   margin-bottom: 20px;
   color: var(--color-white);
 }

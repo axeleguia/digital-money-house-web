@@ -8,7 +8,7 @@
   color: var(--color-black);
   padding: 5px;
   border-radius: var(--border-radius);
-  font-size: 20px;
+  font-size: var(--font-heading-2);
   font-weight: var(--font-weight-bold);
   letter-spacing: 1px;
   text-align: center;

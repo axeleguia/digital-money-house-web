@@ -11,7 +11,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import apiService from "./api.service";
 
-const TWO_HOURS = 60 * 60 * 2;
+const ONE_HOUR = 60 * 60 * 1;
 
 export class AuthService {
   authenticate = async (
@@ -33,8 +33,8 @@ export class AuthService {
   ): AuthResponseType => {
     const sessionId = uuidv4();
     const now = new Date();
-    const expireAt = new Date(now.getTime() + TWO_HOURS * 1000).getTime();
-    redisService.setEx(sessionId, loginResponse.token, TWO_HOURS);
+    const expireAt = new Date(now.getTime() + ONE_HOUR * 1000).getTime();
+    redisService.setEx(sessionId, loginResponse.token, ONE_HOUR);
     return {
       sessionId: sessionId,
       email: email,

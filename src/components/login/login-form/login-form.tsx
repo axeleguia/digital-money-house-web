@@ -7,8 +7,9 @@ import { Small } from "@/components/shared/small/small";
 import { useLogin } from "@/hooks/api-query-hook";
 import { NotFoundError, UnauthorizedError } from "@/interfaces/http-error";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import styles from "./login-form.module.css";
@@ -58,6 +59,12 @@ export const LoginForm = () => {
       );
     }
   };
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.clear();
+  }, []);
 
   return (
     <FormProvider {...controls}>

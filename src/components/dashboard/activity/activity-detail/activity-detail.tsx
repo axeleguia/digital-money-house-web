@@ -7,10 +7,11 @@ import {
   useGetAccountActivityById,
 } from "@/hooks/api-query-hook";
 import { format } from "@formkit/tempo";
+
 import {
   TransactionInfo,
   TransactionInfoProps,
-} from "../../../shared/transaction-info/transaction-info";
+} from "@/components/shared/transaction-info/transaction-info";
 import styles from "./activity-detail.module.css";
 
 type ActivityDetailProps = {

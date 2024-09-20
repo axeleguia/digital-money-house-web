@@ -3,13 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 import apiService from "./services/api.service";
 
 export const config = {
-  matcher: ["/dashboard", "/api/proxy/:path*"],
+  matcher: ["/dashboard", "/dashboard/:path*", "/api/proxy/:path*"],
 };
 
 export async function middleware(request: NextRequest) {
   try {
     const cookieStore = cookies();
-    const sessionId = cookieStore.get("SESSION_ID")?.value || "";
+    const sessionId = cookieStore.get("SESSION_ID")?.value;
+    if (!sessionId)
+      return NextResponse.redirect(new URL("/login", request.url));
     const accessToken = await getAccessToken(sessionId);
     if (!accessToken)
       return NextResponse.redirect(new URL("/login", request.url));

@@ -12,6 +12,12 @@ export const routes: RouteType[] = [
   {
     name: "Actividad",
     path: "/dashboard/activity",
+    children: [
+      {
+        name: "Detalle de la actividad",
+        path: "/dashboard/activity/.*$",
+      },
+    ],
   },
   {
     name: "Tu perfil",

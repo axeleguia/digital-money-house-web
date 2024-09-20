@@ -1,5 +1,5 @@
 .accountInfo > p {
-  font-size: 16px;
+  font-size: var(--font-heading-3);
   line-height: 138%;
   font-weight: var(--font-weight-semibold);
   margin-bottom: 30px;
@@ -24,7 +24,7 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: var(--font-heading-2);
   line-height: 117%;
   color: var(--color-primary);
   font-weight: var(--font-weight-semibold);
